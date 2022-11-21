@@ -1,0 +1,17 @@
+.inv{
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+input:invalid+span:after {
+  position: absolute; content: '✖';
+  padding-left: 5px;
+  color: #050404;
+}
+
+input:valid+span:after {
+  position: absolute;
+  content: '✓';
+  padding-left: 5px;
+  color: #009000;
+}
