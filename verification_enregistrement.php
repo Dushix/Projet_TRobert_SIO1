@@ -79,13 +79,19 @@ if ($erreur === false) {
     echo '<table>';
     echo '<tr>';
     echo '<td>Compte créé</td>';
-    echo '</tr></table>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
+    echo '</tr>';
     echo '</table>';
 
 } else  {
     echo '<table>';
     echo '<tr>';
     echo '<td>Tu as déja un compte</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
     echo '</tr>';
     echo '</table>';
 }
@@ -95,7 +101,11 @@ if ($erreur === false) {
     echo '<tr>';
     echo '<td>Ton mots de passe est incorrect</td>';
     echo '</tr>';
+    echo '<tr>';
+    echo '<a href="Module_enregistrement.html?errCode=5" >Clique ici pour revenir à ...</a>';
+    echo '</tr>';
     echo '</table>';
+    echo '<script>var clk = document.querySelector("a");clk.click();</script>';
 }
 
 // var_dump($not);
