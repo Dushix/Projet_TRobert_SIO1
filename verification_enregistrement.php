@@ -6,7 +6,7 @@ foreach ($_POST as $key => $value) {
     }
     if ($key==="prenom") {
         $prenom = $value;
-        echo " $prenom";
+        //echo " $prenom";
     }
     if ($key==="email") {
         $email = $value;
@@ -29,7 +29,7 @@ foreach ($_POST as $key => $value) {
         // echo " $value";
     }
 }
-if ($password === $confirm_password) {
+if ("$password" == "$confirm_password") {
 
 // Verification
 require ('./ConnectionMySQL.php') ;
@@ -54,13 +54,25 @@ foreach ($prof as $key1 => $value1) {
     }
 }
 if ($erreur === false) {
-$sql = "INSERT INTO Prof (nom , prenom , email, telephone, username, MotdePasse) VALUES('$nom', '$prenom', '$email', '$telephone', '$username', '$password');";
-$connection->query($sql);
-echo '<table>';
-echo '<tr>';
-echo '<td>Compte créé</td>';
-echo '</tr></table>';
-echo '</table>';
+    $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
+
+    $connection = getConnection();
+    $statement = $connection->prepare("INSERT INTO COMPTES(nom,prenom,email,telephone,identifiant,MotDePasse) VALUES(:nom,:prenom,:email,:telephone,:identifiant,:MotDePasse");
+    // echo ("$statement");                                 VALUES('$nom', '$prenom', '$email', '$telephone', '$username', '$password');";
+    $statement->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+    $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->bindParam(':telephone', $telephone, PDO::PARAM_STR);
+    $statement->bindParam(':identifiant', $username, PDO::PARAM_STR);
+    $statement->bindParam(':MotDePasse', $hashDuMotDePasse, PDO::PARAM_STR);
+    // echo ("<br>$statement");
+    $connection->query($statement);
+
+    echo '<table>';
+    echo '<tr>';
+    echo '<td>Compte créé</td>';
+    echo '</tr></table>';
+    echo '</table>';
 
 } else  {
     echo '<table>';
