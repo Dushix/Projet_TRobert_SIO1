@@ -3,7 +3,7 @@
 
     <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://localhost/bkrid/Formulair.css">
+    <link rel="stylesheet" href="enregistrement.css">
     <title>Module d’enregistrement</title>
     
     </head>
@@ -32,8 +32,13 @@
                 </tr>
 
                 <tr>
-                    <td>Saisissez votre nom d'utilisateur :</td>
-                    <td><input type="text" placeholder="Entrer le nom d'utilisateur" name="username" minlength="4" pattern="[a-zA-Z0-9]{4,16}"required></td>
+                    <td>Saisissez NUMEN :</td>
+                    <td><input type="text" name="numen" maxlength="13" pattern="[a-zA-0-9]{13}" required></td>
+                </tr>
+
+                <tr>
+                    <td>Saisissez votre identifiant :</td>
+                    <td><input type="text" placeholder="Entrer le nom d'utilisateur" name="identifiant" minlength="4" pattern="[a-zA-Z0-9]{4,16}"required></td>
                 </tr>
 
                 <tr>
@@ -45,15 +50,12 @@
                     <td>Confirmation du Mot de passe :</td>
                     <td><input class="vide" type="password" name="confirm_password" placeholder="Confirmation du Mot de passe" minlength="8" required></td>
                 </tr>
+
+                <tr>
+                    <td><input type="button" name="verification" value="OK" /></td>
+                    <td><input class="inv" type="submit" name="soumettre" value="OK"/></td>
+                </tr>
         </form>
-        <ul>
-            <!-- // document.querySelectorAll("input")[2].name = "GG"; -->
-            </ul>
-        <from>
-            <tr>
-                <td><input type="button" name="verification" value="OK" /></td>
-                <td><input class="inv" type="submit" name="soumettre" value="OK"/></td>
-            </tr>
             <script>
                     var pas = document.querySelector('[name="password"]');
                     var con = document.querySelector('[name="confirm_password"]');
@@ -74,8 +76,7 @@
                         }
                     }
 
-            </script>   
-        </from>
+            </script>
 
     </body>
 

@@ -16,8 +16,12 @@ foreach ($_POST as $key => $value) {
         $telephone = $value;
         // echo " $value";
     }
-    if ($key==="username") {
-        $username= $value;
+    if ($key==="numen") {
+        $numen = $value;
+        // echo " $value";
+    }
+    if ($key==="identifiant") {
+        $identifiant= $value;
         // echo " $value";
     }
     if ($key==="password") {
@@ -57,16 +61,20 @@ if ($erreur === false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
 
     $connection = getConnection();
-    $statement = $connection->prepare("INSERT INTO COMPTES(nom,prenom,email,telephone,identifiant,MotDePasse) VALUES(:nom,:prenom,:email,:telephone,:identifiant,:MotDePasse");
+    $statement = $connection->prepare("INSERT INTO COMPTES(nom,prenom,email,telephone,Numen,identifiant,MotDePasse) VALUES(:nom,:prenom,:email,:telephone,:numen,:identifiant,:motdepasse)");
     // echo ("$statement");                                 VALUES('$nom', '$prenom', '$email', '$telephone', '$username', '$password');";
     $statement->bindParam(':nom', $nom, PDO::PARAM_STR);
     $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':telephone', $telephone, PDO::PARAM_STR);
-    $statement->bindParam(':identifiant', $username, PDO::PARAM_STR);
-    $statement->bindParam(':MotDePasse', $hashDuMotDePasse, PDO::PARAM_STR);
+    $statement->bindParam(':numen', $numen, PDO::PARAM_STR);
+    $statement->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
+    $statement->bindParam(':motdepasse', $hashDuMotDePasse, PDO::PARAM_STR);
     // echo ("<br>$statement");
-    $connection->query($statement);
+    // echo ("$nom, $prenom, $email, $telephone, $username, $hashDuMotDePasse");
+    // print_r($statement);
+    $statement->execute() ;
+    // $connection->query($statement);
 
     echo '<table>';
     echo '<tr>';
