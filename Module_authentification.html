@@ -1,26 +1,32 @@
 <html>
     <head>
        <meta charset="utf-8">
-        <link rel="stylesheet" href="Formulair.css" media="screen" type="text/css" />
-        <title>Module d’authentification </title>
+        <link rel="stylesheet" href="authentification.css" media="screen" type="text/css" />
+        <title>Module d’authentification</title>
     </head>
     <body>
         <div>
             <!-- zone de connexion -->
-            
-            <form action="verification_authentification.php" method="POST">
-                <div class="back">
-                    <h1>Connexion</h1>
-                    
-                    <label><b>Nom d'utilisateur</b></label>
-                    <input type="text" placeholder="Entrer le nom d'utilisateur" name="nom" required>
-
-                    <label><b>Mot de passe</b></label>
-                    <input type="password" placeholder="Entrer le mot de passe" name="password" required>
-
-                    <input type="submit" value='LOGIN' >
-                </div>
-            </form>
+            <div class="back">
+                <form action="verification_authentification.php" method="POST">
+                    <div class="divinput">
+                        <h1>Connexion</h1>
+                        
+                        <label><b>Nom d'utilisateur</b></label>
+                        <input class="inputc" type="text" placeholder="Entrer le nom d'utilisateur" name="nom" required>
+                        <br>
+                        <label><b>Mot de passe</b></label>
+                        <input class="inputc" type="password" placeholder="Entrer le mot de passe" name="password" required>
+                        <br>
+                        <br>
+                        <input class="submit" type="submit" value='LOGIN' >
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </form>
+            </div>
         </div>
     </body>
 </html>

@@ -18,19 +18,37 @@ input:valid+span:after {
 }
 body {
   margin: 3rem 0 0 0;
-  font-family: var(--body-font);
+  font-family: 'Poppins', sans-serif;
   background-color: black;
   color: white;
   font-weight: 700;
   overflow: hidden;
   /* background: url(https://source.unsplash.com/1600x900/?informatique); */
-  /* background-color: black; */
-  background: url(https://7zine.com/wp-content/uploads/2021/11/Une-percee-theorique-au-MIT-pourrait-augmenter-le-stockage-de.gif);
-  background-size: 1600px 850px;
+  background-color: rgb(167, 32, 32);
+background: url(https://www.enc-bessieres.org/wp-content/uploads/2021/01/IMG_5270.jpg);
+  background-size: 1950px 1050px;
   width:100%;
+  color:#ffffff;
+  }
+  h1{
+    text-align: center;
+  }
+  label{
+    text-align: center;
+  }
+  .submit{
+    border-radius: 10px;
+    outline: 1px solid #000;
+    margin-left: 20rem;
+
+  }
+  input{
+    text-align: center;
+    margin-left: 7rem;
+    column-count: 1;
   }
   .back{
-    margin-top: 2rem;
+  margin-top: 2rem;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   box-shadow: inset 1px 1px 0.12px rgba(255, 255, 255, 0.4),
@@ -40,5 +58,8 @@ body {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   padding-left: 1.5rem;
-  zoom: 55%;
+  width:50%;
+  position:absolute;
+  left: 24%;
+  zoom: 150%;
 }
