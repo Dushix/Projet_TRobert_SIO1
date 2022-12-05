@@ -34,11 +34,12 @@ if ( $err_email == false) {
     $verif = $connection->query($sql);
     $verif_pasword = $verif->fetchall();
 
+    $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
     $err_pasword = true;
     foreach ( $verif_pasword as $key => $value) {
         foreach ( $value as $key2 => $value2) {
             if ($key2 == "MotdePasse") {
-                if ($value2 == $password) {
+                if (password_verify($value2) == $hashDuMotDePasse) {
                     $err_pasword = false;
                 }
             }
