@@ -39,6 +39,7 @@ if ( $err_id == false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
     print_r($verif_pasword);
     $err_pasword = true;
+<<<<<<< HEAD
     // foreach ( $verif_pasword as $key => $value) {
     //     foreach ( $value as $sousKey => $sousValue) {
     //         if ($sousKey == "MotdePasse") {
@@ -48,6 +49,17 @@ if ( $err_id == false) {
     //         }
     //     }
     // }
+=======
+    foreach ( $verif_pasword as $key => $value) {
+        foreach ( $value as $sousKey => $sousValue) {
+            if ($sousKey == "MotdePasse") {
+                if (password_verify(string $sousValue, string $hashDuMotDePasse) == TRUE) {
+                    $err_pasword = false;
+                }
+            }
+        }
+    }
+>>>>>>> 41ad967ba86bd2045d0b35f603ba17af5412b9c5
 
     if ( $err_pasword == false) {
 
