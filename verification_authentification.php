@@ -37,9 +37,9 @@ if ( $err_email == false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
     $err_pasword = true;
     foreach ( $verif_pasword as $key => $value) {
-        foreach ( $value as $key2 => $value2) {
-            if ($key2 == "MotdePasse") {
-                if (password_verify($value2) == $hashDuMotDePasse) {
+        foreach ( $value as $sousKey => $sousValue) {
+            if ($sousKey == "MotdePasse") {
+                if (password_verify(string $sousValue, string $hashDuMotDePasse) == TRUE {
                     $err_pasword = false;
                 }
             }
