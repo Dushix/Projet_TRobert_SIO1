@@ -1,50 +1,53 @@
 <?php
 foreach ($_POST as $key => $value) {
-    if ($key==="nom") {
-            $nom = $value;
+    if ($key==="utilisateur") {
+        $utilisateur = $value;
     }
     if ($key==="password") {
         $password = $value;
     }
 }
 
-// Verification de l email
+// Verification de l utilisateur
 require ('./ConnectionMySQL.php') ;
-$sql = "SELECT email FROM prof";
+$sql = "select identifiant from comptes where identifiant= ?";
 $connection = getConnection();
 $verif = $connection->query($sql);
-$verif_email = $verif->fetchall();
-
-$err_email = true;
-foreach ($verif_email as $key1 => $value1) {
-    foreach ($value1 as $key2 => $value2) {
-        if ($key2 == "email"){
-            if ($value2 == $nom) {
-                $err_email = false;
-            }
-        }
-    }
-}
+$verif->bindParam(1, $utilisateur, PDO::PARAM_STR);
+$verif_id = $verif->fetchall();
+print_r($verif_id);
+$err_id = true;
+// foreach ($verif_id as $key1 => $value1) {
+//     foreach ($value1 as $key2 => $value2) {
+//         if ($key2 == "email"){
+//             if ($value2 == $nom) {
+//                 $err_id = false;
+//             }
+//         }
+//     }
+// }
 
 // recuperation du mots de passe
-if ( $err_email == false) {
+if ( $err_id == false) {
 
-    $sql = "SELECT MotdePasse FROM prof WHERE email = '$nom'";
+    $sql = "select identifiant, motDePasse from comptes where identifiant= ?";
+    // ->bindParam(1, $utilisateur, PDO::PARAM_STR);
     $connection = getConnection();
     $verif = $connection->query($sql);
     $verif_pasword = $verif->fetchall();
 
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
+    print_r($verif_pasword);
     $err_pasword = true;
-    foreach ( $verif_pasword as $key => $value) {
-        foreach ( $value as $sousKey => $sousValue) {
-            if ($sousKey == "MotdePasse") {
-                if (password_verify(string $sousValue, string $hashDuMotDePasse) == TRUE {
-                    $err_pasword = false;
-                }
-            }
-        }
-    }
+    // foreach ( $verif_pasword as $key => $value) {
+    //     foreach ( $value as $sousKey => $sousValue) {
+    //         if ($sousKey == "MotdePasse") {
+    //             if (password_verify(string $sousValue, string $hashDuMotDePasse) == TRUE) {
+    //                 $err_pasword = false;
+    //             }
+    //         }
+    //     }
+    // }
 
     if ( $err_pasword == false) {
 
