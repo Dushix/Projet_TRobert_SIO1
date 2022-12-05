@@ -39,7 +39,7 @@ if ( $err_email == false) {
     foreach ( $verif_pasword as $key => $value) {
         foreach ( $value as $sousKey => $sousValue) {
             if ($sousKey == "MotdePasse") {
-                if (password_verify(string $sousValue, string $hashDuMotDePasse) == TRUE {
+                if (password_verify(string $sousValue, string $hashDuMotDePasse) == TRUE) {
                     $err_pasword = false;
                 }
             }
