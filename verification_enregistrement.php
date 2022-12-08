@@ -1,68 +1,43 @@
 <?php
-foreach ($_POST as $key => $value) {
-    if ($key==="nom") {
-            $nom = $value;
-            // echo " $value";
-    }
-    if ($key==="prenom") {
-        $prenom = $value;
-        //echo " $prenom";
-    }
-    if ($key==="email") {
-        $email = $value;
-        // echo " $value";
-    }
-    if ($key==="telephone") {
-        $telephone = $value;
-        // echo " $value";
-    }
-    if ($key==="numen") {
-        $numen = $value;
-        // echo " $value";
-    }
-    if ($key==="identifiant") {
-        $identifiant= $value;
-        // echo " $value";
-    }
-    if ($key==="password") {
-        $password = $value;
-        // echo " $value";
-    }
-    if ($key==="confirm_password") {
-        $confirm_password = $value;
-        // echo " $value";
-    }
+if (isset($_POST['soumettre'])){
+    $nom = (isset($_POST['nom'])) ? $_POST['nom'] : null;
+    $prenom = (isset($_POST['prenom'])) ? $_POST['prenom'] : null;
+    $email = (isset($_POST['email'])) ? $_POST['email'] : null;
+    $telephone = (isset($_POST['telephone'])) ? $_POST['telephone'] : null;
+    $numen = (isset($_POST['numen'])) ? $_POST['numen'] : null;
+    $identifiant = (isset($_POST['identifiant'])) ? $_POST['identifiant'] : null;
+    $password = (isset($_POST['password'])) ? $_POST['password'] : null;
+    $confirm_password = (isset($_POST['confirm_password'])) ? $_POST['confirm_password'] : null;
 }
+if(!empty($nom)&&!empty($prenom)&&!empty($password)&&!empty($email)&&!empty($telephone)&&!empty($numen)&&!empty($identifiant)&&!empty($password)&&!empty($confirm_password)){
 if ("$password" == "$confirm_password") {
 
 // Verification
 require ('./ConnectionMySQL.php') ;
-$vfsql = "SELECT email FROM prof";
+
 $connection = getConnection();
-$verif = $connection->query($vfsql);
-$prof = $verif->fetchall();
-
-
+$identifiant_verif = $connection->prepare('SELECT distinct identifiant FROM comptes WHERE identifiant = ":identifiant_verif" ');
+$identifiant_verif->bindParam(':identifiant_verif', $identifiant, PDO::PARAM_STR);
+$identifiant_verif->execute();
+$resultat = $identifiant_verif->fetchAll();
+print_r($resultat);
+echo($identifiant);
 $erreur = false;
-foreach ($prof as $key1 => $value1) {
-    foreach ($value1 as $key2 => $value2) {
-        if ($key2 === "email"){
-            if ($value2 === $email) {
-                $erreur = true;
-                break;
-            }
-        }
-    }
-    if ($erreur === true) {
-        break;
-    }
-}
+// foreach ($prof as $key1 => $value1) {
+//     foreach ($value1 as $key2 => $value2) {
+//         if ($key2 === "email"){
+//             if ($value2 === $email) {
+//                 $erreur = true;
+//                 break;
+//             }
+//         }
+//     }
+// }
 if ($erreur === false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
 
-    $connection = getConnection();
     $statement = $connection->prepare("INSERT INTO COMPTES(nom,prenom,email,telephone,Numen,identifiant,MotDePasse) VALUES(:nom,:prenom,:email,:telephone,:numen,:identifiant,:motdepasse)");
-    // echo ("$statement");                                 VALUES('$nom', '$prenom', '$email', '$telephone', '$username', '$password');";
+    // echo($nom, $prenom, $email, $telephone, $utilisateur, $password);
     $statement->bindParam(':nom', $nom, PDO::PARAM_STR);
     $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
@@ -72,7 +47,7 @@ if ($erreur === false) {
     $statement->bindParam(':motdepasse', $hashDuMotDePasse, PDO::PARAM_STR);
     // echo ("<br>$statement");
     // echo ("$nom, $prenom, $email, $telephone, $username, $hashDuMotDePasse");
-    // print_r($statement);
+    //     print_r($statement);
     $statement->execute() ;
     // $connection->query($statement);
 
@@ -107,7 +82,10 @@ if ($erreur === false) {
     echo '</table>';
     echo '<script>var clk = document.querySelector("a");clk.click();</script>';
 }
-
+    } else {
+    $code_err = 862;
+    echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+    }
 // var_dump($not);
 // foreach ($not as $key1 => $value1) {
 //     foreach ($value1 as $key2 => $value2) {
