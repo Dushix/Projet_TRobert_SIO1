@@ -1,11 +1,127 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <header>
-        <title>Tableau</title>
+        <link rel="stylesheet" href="./tableau.css">
+        <script type="text/javascript" src="Tableau.js">let selectElem = document.querySelector("select");
+            let inputElems = document.querySelectorAll("input");
+            
+            selectElem.onchange = function() {
+              for(let i = 0; i < inputElems.length; i++) {
+                inputElems[i].value = "";
+              }
+            
+              if(selectElem.value === "États-Unis") {
+                inputElems[2].parentNode.style.display = "inline";
+            
+                inputElems[0].placeholder = "Code régional";
+                inputElems[0].pattern = "[0-9]{3}";
+            
+                inputElems[1].placeholder = "Première partie";
+                inputElems[1].pattern = "[0-9]{3}";
+                inputElems[1].setAttribute("aria-label","Première partie du numéro");
+            
+                inputElems[2].placeholder = "Seconde partie";
+                inputElems[2].pattern = "[0-9]{4}";
+                inputElems[2].setAttribute("aria-label","Seconde partie du numéro");
+              } else if(selectElem.value === "Royaume-Uni") {
+                inputElems[2].parentNode.style.display = "none";
+            
+                inputElems[0].placeholder = "Code régional";
+                inputElems[0].pattern = "[0-9]{3,6}";
+            
+                inputElems[1].placeholder = "Numéro local";
+                inputElems[1].pattern = "[0-9]{4,8}";
+                inputElems[1].setAttribute("aria-label","Numéro local");
+              } else if(selectElem.value === "Allemagne") {
+                inputElems[2].parentNode.style.display = "inline";
+            
+                inputElems[0].placeholder = "Code régional";
+                inputElems[0].pattern = "[0-9]{3,5}";
+            
+                inputElems[1].placeholder = "Première partie";
+                inputElems[1].pattern = "[0-9]{2,4}";
+                inputElems[1].setAttribute("aria-label","Première partie du numéro");
+            
+                inputElems[2].placeholder = "Seconde partie";
+                inputElems[2].pattern = "[0-9]{4}";
+                inputElems[2].setAttribute("aria-label","Seconde partie du numéro");
+              }
+            }</script>
     </header>
-    <head>
-        
-    </head>
-    <body>
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau</title>
+    <!-- CSS FOR STYLING THE PAGE -->
 
-    </body>
+
+    <form>
+        <div>
+            <label for="country">Veuillez choisir votre pays :</label>
+            <select id="country" name="country">
+            <option>Royaume-Uni</option>
+            <option selected>États-Unis</option>
+            <option>Allemagne</option>
+            </select>
+        </div>
+        <div>
+            <p>Veuillez saisir vos numéros de téléphone : </p>
+            <span class="areaDiv">
+            <input id="areaNo" name="areaNo" type="tel" required
+                    placeholder="Code régional" pattern="[0-9]{3}"
+                    aria-label="Code régional">
+            <span class="validity"></span>
+            </span>
+            <span class="number1Div">
+            <input id="number1" name="number1" type="tel" required
+                    placeholder="Premier fragment" pattern="[0-9]{3}"
+                    aria-label="Premier fragment du numéro">
+            <span class="validity"></span>
+            </span>
+            <span class="number2Div">
+            <input id="number2" name="number2" type="tel" required
+                    placeholder="Second fragment" pattern="[0-9]{4}"
+                    aria-label="Second fragment du numéro">
+            <span class="validity"></span>
+            </span>
+        </div>
+        <div>
+            <button>Envoyer</button>
+        </div>
+    </form>
+
+
+</head>
+ 
+<!--<body>
+    <section>
+        <h1>Tableau</h1>
+        
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>BTS</th>
+                <th>Option</th>
+            </tr>
+            
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result->fetch_assoc())
+                {
+            ?>
+            <tr>
+                
+                <td><?php echo $rows['nom_eleve'];?></td>
+                <td><?php echo $rows['prenom_eleve'];?></td>
+                <td><?php echo $rows['code_bts'];?></td>
+                <td><?php echo $rows['code_option'];?></td>
+            </tr>
+            <?php
+                }
+            ?>
+        </table>
+    </section>
+</body>-->
+ 
 </html>

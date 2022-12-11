@@ -25,50 +25,59 @@ if ($mysqli->connect_error) {
 $sql = "SELECT e.nom_eleve,e.prenom_eleve,lb.code_bts,lb.code_option FROM eleve e
 INNER JOIN liste_des_bts lb
 ON e.fk_ID_OPTION = lb.ID_BTS";
-
 $result = $mysqli->query($sql);
 $mysqli->close();
 ?>
 <!-- HTML code to display data in tabular format -->
 <!DOCTYPE html>
 <html lang="en">
+    <header>
+        <link rel="stylesheet" href="./tableau.css">
+        <script type="text/javascript" src="Tableau.js"></script>
+    </header>
  
 <head>
     <meta charset="UTF-8">
-    <title>GFG User Details</title>
+    <title>Tableau</title>
     <!-- CSS FOR STYLING THE PAGE -->
-    <style>
-        table {
-            margin: 0 auto;
-            font-size: large;
-            border: 1px solid black;
-        }
- 
-        h1 {
-            text-align: center;
-            color: #006600;
-            font-size: xx-large;
-            font-family: 'Gill Sans', 'Gill Sans MT',
-            ' Calibri', 'Trebuchet MS', 'sans-serif';
-        }
- 
-        td {
-            background-color: #E4F5D4;
-            border: 1px solid black;
-        }
- 
-        th,
-        td {
-            font-weight: bold;
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-        }
- 
-        td {
-            font-weight: lighter;
-        }
-    </style>
+
+
+    <form>
+        <div>
+            <label for="country">Veuillez choisir votre pays :</label>
+            <select id="country" name="country">
+            <option>Royaume-Uni</option>
+            <option selected>États-Unis</option>
+            <option>Allemagne</option>
+            </select>
+        </div>
+        <div>
+            <p>Veuillez saisir vos numéros de téléphone : </p>
+            <span class="areaDiv">
+            <input id="areaNo" name="areaNo" type="tel" required
+                    placeholder="Code régional" pattern="[0-9]{3}"
+                    aria-label="Code régional">
+            <span class="validity"></span>
+            </span>
+            <span class="number1Div">
+            <input id="number1" name="number1" type="tel" required
+                    placeholder="Premier fragment" pattern="[0-9]{3}"
+                    aria-label="Premier fragment du numéro">
+            <span class="validity"></span>
+            </span>
+            <span class="number2Div">
+            <input id="number2" name="number2" type="tel" required
+                    placeholder="Second fragment" pattern="[0-9]{4}"
+                    aria-label="Second fragment du numéro">
+            <span class="validity"></span>
+            </span>
+        </div>
+        <div>
+            <button>Envoyer</button>
+        </div>
+    </form>
+
+
 </head>
  
 <body>
@@ -79,6 +88,8 @@ $mysqli->close();
             <tr>
                 <th>Nom</th>
                 <th>Prenom</th>
+                <th>BTS</th>
+                <th>Option</th>
             </tr>
             <!-- PHP CODE TO FETCH DATA FROM ROWS -->
             <?php
@@ -91,6 +102,8 @@ $mysqli->close();
                     ROW OF EVERY COLUMN -->
                 <td><?php echo $rows['nom_eleve'];?></td>
                 <td><?php echo $rows['prenom_eleve'];?></td>
+                <td><?php echo $rows['code_bts'];?></td>
+                <td><?php echo $rows['code_option'];?></td>
             </tr>
             <?php
                 }
