@@ -22,7 +22,10 @@ if ($mysqli->connect_error) {
 }
  
 // SQL query to select data from database
-$sql = " SELECT * FROM eleve ";
+$sql = "SELECT e.nom_eleve,e.prenom_eleve,lb.code_bts,lb.code_option FROM eleve e
+INNER JOIN liste_des_bts lb
+ON e.fk_ID_OPTION = lb.ID_BTS";
+
 $result = $mysqli->query($sql);
 $mysqli->close();
 ?>
