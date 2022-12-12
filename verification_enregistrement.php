@@ -16,23 +16,19 @@ if ("$password" == "$confirm_password") {
 require ('./ConnectionMySQL.php') ;
 
 $connection = getConnection();
-$identifiant_verif = $connection->prepare('SELECT distinct identifiant FROM comptes WHERE identifiant = ":identifiant_verif" ');
-$identifiant_verif->bindParam(':identifiant_verif', $identifiant, PDO::PARAM_STR);
+$sql_id = "SELECT identifiant FROM comptes WHERE identifiant= ?";
+$identifiant_verif = $connection->prepare($sql_id);
+$identifiant_verif->bindParam(1, $identifiant, PDO::PARAM_STR);
 $identifiant_verif->execute();
 $resultat = $identifiant_verif->fetchAll();
-print_r($resultat);
-echo($identifiant);
-$erreur = false;
-// foreach ($prof as $key1 => $value1) {
-//     foreach ($value1 as $key2 => $value2) {
-//         if ($key2 === "email"){
-//             if ($value2 === $email) {
-//                 $erreur = true;
-//                 break;
-//             }
-//         }
-//     }
-// }
+
+$erreur = true;
+if ($resultat == NULL){
+    $erreur = false;
+}
+
+
+
 if ($erreur === false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
 

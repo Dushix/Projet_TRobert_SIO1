@@ -25,13 +25,8 @@ if ( $resultat == NULL) {
     echo '</table>';
 } else {
 
-foreach ($resultat as $key => $value) {
-    foreach ($value as $sous_key => $sous_value) {
-        if ($sous_key == "motDePasse"){
-            
-            $hashDuMotDePasse = $sous_value;  
-        }
-    }
+    $hashDuMotDePasse = $resultat[0]["motDePasse"];
+
 }
 $pass_verif = password_verify($password, $hashDuMotDePasse);
 
@@ -41,6 +36,9 @@ if ($pass_verif == true){
     echo '<td>Le mot de passe est valide</td>';
     echo '</tr>';
     echo '</table>';
+    $value8 ="$utilisateur";
+    setcookie("TestCookie", $value, time()+3600)
+    echo($_COOKIE["$utilisateur"];);
         } else {
             $code_err = 99;
             echo '<table>';
@@ -51,7 +49,7 @@ if ($pass_verif == true){
             }
     } 
 
-}
+
 else {
 $code_err = 862;
 echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
