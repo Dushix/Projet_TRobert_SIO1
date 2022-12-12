@@ -16,7 +16,7 @@
 
 
 -- Listage de la structure de la base pour bkridbis
-CREATE DATABASE IF NOT EXISTS `bkridbis` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `bkridbis` ;
 USE `bkridbis`;
 
 -- Listage de la structure de table bkridbis. comptes
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `comptes` (
   `MotDePasse` varchar(255) NOT NULL,
   `dateChangement` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_compte`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 /*COLLATE=utf8mb4_0900_ai_ci*/;
 
 -- Listage des données de la table bkridbis.comptes : ~0 rows (environ)
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `eleve` (
   `prenom_eleve` varchar(40) DEFAULT NULL,
   `fk_ID_OPTION` int DEFAULT NULL,
   PRIMARY KEY (`ID_ELEVE`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=UTF8MB4 /*COLLATE=utf8mb4_0900_ai_ci*/;
 
 -- Listage des données de la table bkridbis.eleve : ~31 rows (environ)
 INSERT INTO `eleve` (`ID_ELEVE`, `nom_eleve`, `prenom_eleve`, `fk_ID_OPTION`) VALUES
@@ -81,11 +81,11 @@ INSERT INTO `eleve` (`ID_ELEVE`, `nom_eleve`, `prenom_eleve`, `fk_ID_OPTION`) VA
 -- Listage de la structure de table bkridbis. enseignant
 CREATE TABLE IF NOT EXISTS `enseignant` (
   `ID_ENSEIGNANT` int NOT NULL AUTO_INCREMENT,
-  `Nom_enseignant` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `Prenom_enseignant` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Nom_enseignant` varchar(40) CHARACTER SET utf8mb4 /*COLLATE utf8mb4_0900_ai_ci*/ DEFAULT NULL,
+  `Prenom_enseignant` varchar(40) CHARACTER SET utf8mb4 /*COLLATE utf8mb4_0900_ai_ci*/ DEFAULT NULL,
   `Numen` char(13) DEFAULT NULL,
   PRIMARY KEY (`ID_ENSEIGNANT`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 /*COLLATE=utf8mb4_0900_ai_ci*/;
 
 -- Listage des données de la table bkridbis.enseignant : ~5 rows (environ)
 INSERT INTO `enseignant` (`ID_ENSEIGNANT`, `Nom_enseignant`, `Prenom_enseignant`, `Numen`) VALUES
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `liste_des_bts` (
   `code_option` varchar(10) DEFAULT NULL,
   `libelle_option` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`ID_BTS`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 /*COLLATE=utf8mb4_0900_ai_ci*/;
 
 -- Listage des données de la table bkridbis.liste_des_bts : ~9 rows (environ)
 INSERT INTO `liste_des_bts` (`ID_BTS`, `code_bts`, `Libelle_bts`, `code_option`, `libelle_option`) VALUES
@@ -114,7 +114,7 @@ INSERT INTO `liste_des_bts` (`ID_BTS`, `code_bts`, `Libelle_bts`, `code_option`,
 	(5, 'CG', 'Comptabilité et Gestion', '', ''),
 	(6, 'NDRC', 'Négociation Digitalisation de la relation client', '', ''),
 	(7, 'PI', 'Professions immobilières', '', ''),
-	(8, 'SAM', 'Support à l\'action managériale', '', ''),
+	(8, 'SAM', "Support à l'action managériale", '', ''),
 	(9, 'TOU', 'Tourisme', '', '');
 
 -- Listage de la structure de table bkridbis. liste_epreuves_ccf
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `liste_epreuves_ccf` (
   `code_ccf` varchar(15) DEFAULT NULL,
   `Libelle_ccf` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`ID_CCF`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 /*COLLATE=utf8mb4_0900_ai_ci*/;
 
 -- Listage des données de la table bkridbis.liste_epreuves_ccf : ~3 rows (environ)
 INSERT INTO `liste_epreuves_ccf` (`ID_CCF`, `code_ccf`, `Libelle_ccf`) VALUES
