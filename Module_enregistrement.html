@@ -9,58 +9,79 @@
     </head>
 
     <body>
-        <form name="Formulaire" action="verification_enregistrement.php" method="post">
-            <table>
-                <tr>
-                    <td>Saisissez votre nom :</td>
-                    <td><input type="text" name="nom" pattern="[a-zA-ZÀ-ÿ-.]{2,64}" title="Merci de fournir votre nom" required></td>
-                </tr>
+        <div class="back">
+            <form name="Formulaire" action="verification_enregistrement.php" method="post">
+                <table>
+                    <tr>
+                        <td>Saisissez votre nom :</td>
+                        <td><input type="text" name="nom" pattern="[a-zA-ZÀ-ÿ-.]{2,64}" title="Merci de fournir votre nom" required></td>
+                    </tr>
 
-                <tr>
-                    <td>Saisissez votre prénom :</td>
-                    <td><input type="text" name="prenom" minlength="2" pattern="[a-zA-ZÀ-ÿ-.]{2,32}" title="Merci de fournir votre prenom" required></td>
-                </tr>
+                    <tr>
+                        <td>Saisissez votre prénom :</td>
+                        <td><input type="text" name="prenom" minlength="2" pattern="[a-zA-ZÀ-ÿ-.]{2,32}" title="Merci de fournir votre prenom" required></td>
+                    </tr>
 
-                <tr>
-                    <td>Saisissez votre email :</td>
-                    <td><input type="text" name="email" placeholder="example@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Merci de fournir une adresse valide." required></td>
-                </tr>
+                    <tr>
+                        <td>Saisissez votre email :</td>
+                        <td><input type="text" name="email" placeholder="example@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Merci de fournir une adresse valide." required></td>
+                    </tr>
 
-                <tr>
-                    <td>Saisissez votre télephone :</td>
-                    <td><input type="tel" name="telephone" maxlength="10" pattern="[0-9]{10}" required></td>
-                </tr>
+                    <tr>
+                        <td>Saisissez votre télephone :</td>
+                        <td><input type="tel" name="telephone" maxlength="10" pattern="[0-9]{10}" required></td>
+                    </tr>
 
-                <tr>
-                    <td>Saisissez NUMEN :</td>
-                    <td><input type="text" name="numen" maxlength="13" pattern="[a-zA-0-9]{13}" required></td>
-                </tr>
+                    <tr>
+                        <td>Saisissez NUMEN :</td>
+                        <td><input type="text" name="numen" maxlength="13" pattern="[a-zA-0-9]{13}" required></td>
+                    </tr>
 
-                <tr>
-                    <td>Saisissez votre identifiant :</td>
-                    <td><input type="text" placeholder="Entrer le nom d'utilisateur" name="identifiant" minlength="4" pattern="[a-zA-Z0-9]{4,16}"required></td>
-                </tr>
+                    <tr>
+                        <td>Saisissez votre identifiant :</td>
+                        <td><input type="text" placeholder="Entrer le nom d'utilisateur" name="identifiant" minlength="4" pattern="[a-zA-Z0-9]{4,16}"required></td>
+                    </tr>
 
-                <tr>
-                    <td>Mot de passe (8 characters minimum):</td>
-                    <td><input class="vide" type="password" name="password" placeholder="Entrer le mot de passe" minlength="8" required></td>
-                </tr>
+                    <tr>
+                        <td>Mot de passe (8 characters minimum):</td>
+                        <td><input class="vide" type="password" name="password" placeholder="Entrer le mot de passe" minlength="8" required></td>
+                    </tr>
 
-                <tr>
-                    <td>Confirmation du Mot de passe :</td>
-                    <td><input class="vide" type="password" name="confirm_password" placeholder="Confirmation du Mot de passe" minlength="8" required></td>
-                </tr>
+                    <tr>
+                        <td>Confirmation du Mot de passe :</td>
+                        <td><input class="vide" type="password" name="confirm_password" placeholder="Confirmation du Mot de passe" minlength="8" required></td>
+                    </tr>
+                    <tr id="log">
 
-                <tr>
-                    <td><input type="button" name="verification" value="OK" /></td>
-                    <td><input class="inv" type="submit" name="soumettre" value="OK"/></td>
-                </tr>
-        </form>
+                    </tr>
+
+                    <tr>
+                        <td><input type="button" name="verification" value="OK" /></td>
+                        <td><input hidden type="submit" name="soumettre" value="OK"/></td>
+                    </tr>
+            </form>
+        </div>
             <script>
                     var pas = document.querySelector('[name="password"]');
                     var con = document.querySelector('[name="confirm_password"]');
                     var sub = document.querySelector('[type="submit"]');
                     var but = document.querySelector('[type="button"]');
+                    var errMessage = document.querySelector('[name="abc"]');
+                    var Message = document.createTextNode('Erreur de saisie');
+                    var cre = document.createElement('tr')
+                    const input = document.querySelector('input')
+                    const log = document.getElementById('log') 
+
+                    input.addEventListener('invalid', (e) => {
+                    log.appendChild(Object.assign(
+                        document.createElement('li'),
+                        { textContent: JSON.stringify(e.target.value) }
+                    ))
+                    })
+
+                    input.addEventListener('invalid',log.appendChild(Object.assign(
+                        document.createTextNode('Erreur de saisie')))
+                    )
 
                     but.addEventListener('click', testvf);
 
@@ -71,7 +92,7 @@
                             // document.forms["Formulaire"].submit();  
                         } else {
                             pas.id = "erreurpass";
-                            con.id = "erreur_pass";
+                            errMessage.appendChild(cre,Message);                   
                             alert ("NON");  
                         }
                     }
