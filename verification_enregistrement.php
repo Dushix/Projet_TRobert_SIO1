@@ -1,3 +1,9 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="enregistrement.css">
+    <title>Module d’enregistrement</title>
+    
+</head>
 <?php
 if (isset($_POST['soumettre'])){
     $nom = (isset($_POST['nom'])) ? $_POST['nom'] : null;
@@ -12,10 +18,25 @@ if (isset($_POST['soumettre'])){
 if(!empty($nom)&&!empty($prenom)&&!empty($password)&&!empty($email)&&!empty($telephone)&&!empty($numen)&&!empty($identifiant)&&!empty($password)&&!empty($confirm_password)){
 if ("$password" == "$confirm_password") {
 
-// Verification
+// Verification du Numen
 require ('./ConnectionMySQL.php') ;
 
 $connection = getConnection();
+$sql_fk_id = "SELECT Numen FROM enseignants WHERE Numen= ?";
+$fk_id_verif = $connection->prepare($sql_fk_id);
+$fk_id_verif->bindParam(1, $numen, PDO::PARAM_STR);
+$fk_id_verif->execute();
+$resultat_fk_id = $fk_id_verif->fetchAll();
+
+$erreur_ens = true;
+if ($resultat_fk_id != NULL){
+    $erreur_ens = false;
+}
+
+if($erreur_ens == false){
+
+// Verification si il a pas 2 compts
+
 $sql_id = "SELECT identifiant FROM comptes WHERE identifiant= ?";
 $identifiant_verif = $connection->prepare($sql_id);
 $identifiant_verif->bindParam(1, $identifiant, PDO::PARAM_STR);
@@ -27,13 +48,21 @@ if ($resultat == NULL){
     $erreur = false;
 }
 
+//Récupéretion de id enseignant
+$sql_id_ens = "SELECT ID_ENSEIGNANT FROM enseignants WHERE Numen= ?";
+$id_ens = $connection->prepare($sql_id_ens);
+$id_ens->bindParam(1, $numen, PDO::PARAM_STR);
+$id_ens->execute();
+$id_enseignant = $id_ens->fetchAll();
 
+$fk_id_enseignant = $id_enseignant[0]["ID_ENSEIGNANT"];
 
 if ($erreur === false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
 
-    $statement = $connection->prepare("INSERT INTO COMPTES(nom,prenom,email,telephone,Numen,identifiant,MotDePasse) VALUES(:nom,:prenom,:email,:telephone,:numen,:identifiant,:motdepasse)");
+    $statement = $connection->prepare("INSERT INTO COMPTES(fk_id_enseignant,nom,prenom,email,telephone,Numen,identifiant,MotDePasse) VALUES(:fk_id_enseignant,:nom,:prenom,:email,:telephone,:numen,:identifiant,:motdepasse)");
     // echo($nom, $prenom, $email, $telephone, $utilisateur, $password);
+    $statement->bindParam(':fk_id_enseignant', $fk_id_enseignant, PDO::PARAM_STR);
     $statement->bindParam(':nom', $nom, PDO::PARAM_STR);
     $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
@@ -59,7 +88,7 @@ if ($erreur === false) {
 } else  {
     echo '<table>';
     echo '<tr>';
-    echo '<td>Tu as déja un compte</td>';
+    echo '<td>Vous avez déja un compte</td>';
     echo '</tr>';
     echo '<tr>';
     echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
@@ -67,28 +96,30 @@ if ($erreur === false) {
     echo '</table>';
 }
 
+}else{
+    echo '<table>';
+    echo '<tr>';
+    echo '<td>';
+    echo "vous n'êtes pas enseignant";
+    echo'</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
+    echo '</tr>';
+    echo '</table>';
+}
 } else {
     echo '<table>';
     echo '<tr>';
     echo '<td>Ton mots de passe est incorrect</td>';
     echo '</tr>';
-    echo '<tr>';
-    echo '<a href="Module_enregistrement.html?errCode=5" >Clique ici pour revenir à ...</a>';
-    echo '</tr>';
     echo '</table>';
-    echo '<script>var clk = document.querySelector("a");clk.click();</script>';
+    header('Location: Module_enregistrement.html');    
+    exit();
 }
     } else {
     $code_err = 862;
-    echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+    header("Location: Module_enregistrement.html?erreur=$code_err");    
+    exit();
     }
-// var_dump($not);
-// foreach ($not as $key1 => $value1) {
-//     foreach ($value1 as $key2 => $value2) {
-//         if ($key2 === "note"){
-//             echo "<br> Note $key1 est de $value2 / 20";
-//         }
-//     }
-// }
-
 ?>

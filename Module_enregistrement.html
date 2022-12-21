@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="enregistrement.css">
     <title>Module d’enregistrement</title>
-    
+
     </head>
 
     <body>
@@ -72,16 +72,16 @@
                     const input = document.querySelector('input')
                     const log = document.getElementById('log') 
 
-                    input.addEventListener('invalid', (e) => {
-                    log.appendChild(Object.assign(
-                        document.createElement('li'),
-                        { textContent: JSON.stringify(e.target.value) }
-                    ))
-                    })
+                    // input.addEventListener('invalid', (e) => {
+                    // log.appendChild(Object.assign(
+                    //     document.createElement('li'),
+                    //     { textContent: JSON.stringify(e.target.value) }
+                    // ))
+                    // })
 
-                    input.addEventListener('invalid',log.appendChild(Object.assign(
-                        document.createTextNode('Erreur de saisie')))
-                    )
+                    // input.addEventListener('invalid',log.appendChild(Object.assign(
+                    //     document.createTextNode('Erreur de saisie')))
+                    // )
 
                     but.addEventListener('click', testvf);
 
