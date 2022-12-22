@@ -86,12 +86,18 @@ $info_eleves = $info_eleves->fetchAll();
                     <option id='SLAM'>SLAM</option>
                     <option id='SISR'>SISR</option>
                     </select>
-                  </td>";// Option
+                    <input name='option_input_$id_eleve' style='display: none;'></td>";// Option
                   }else{
                     echo "<td></td>";// Option
                   }
                   echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
-                  echo "<td></td>";// Libelle CCF
+                  echo "<td>
+                  <select name='CCF_$id_eleve' multiple>
+                  <option id='E4'>E4</option>
+                  <option id='E5SISR'>E5SISR</option>
+                  <option id='E5SLAM'>E5SLAM</option>
+                  </select>
+                  <input name='CCF_input_$id_eleve' style='display: none;'></td>";// CCF
                   echo "<td></td>";// Candidat
                   echo "<td></td>";// Date examin
                   echo "<td></td>";// Durée de l’épreuve
@@ -113,9 +119,25 @@ $info_eleves = $info_eleves->fetchAll();
                   $cible_option = "name=$nom_option";
                   $doc_option = "document.querySelector('select[$cible_option]')";
 
+                  $nom_CCF = "CCF_$id_eleve";
+                  $cible_CCF = "name=$nom_CCF";
+                  $doc_CCF = "document.querySelector('select[$cible_CCF]')";
+
+                  // input
+                  $nom_input_option = "option_input_$id_eleve";
+                  $cible_input_option = "name=$nom_input_option";
+                  $doc_input_option = "document.querySelector('input[$cible_input_option]')";
+
+                  $nom_input_CCF = "CCF_input_$id_eleve";
+                  $cible_input_CCF = "name=$nom_input_CCF";
+                  $doc_input_CCF = "document.querySelector('input[$cible_input_CCF]')";
+
                   echo "<script>
                   var doc_bts_n$id_eleve = $doc_bts
                   var doc_option_n$id_eleve = $doc_option
+                  var doc_CCF_n$id_eleve = $doc_CCF
+                  doc_input_option_n$id_eleve = $doc_input_option
+                  doc_input_CCF_n$id_eleve = $doc_input_CCF
 
                   doc_bts_n$id_eleve.options.$bts.selected = true
                   doc_option_n$id_eleve.options.$option.selected = true
@@ -125,9 +147,33 @@ $info_eleves = $info_eleves->fetchAll();
                     var select_n$id_eleve = doc_bts_n$id_eleve.options.selectedIndex
 
                     if(doc_bts_n$id_eleve.options[select_n$id_eleve].value == 'SIO'){
-                      doc_option_n$id_eleve.parentNode.style.display = 'inline';
+                      // input
+                      doc_input_option_n$id_eleve.style.display = 'none';
+                      doc_input_CCF_n$id_eleve.style.display = 'none';
+
+                      doc_option_n$id_eleve.style.display = '';
+                      doc_CCF_n$id_eleve.style.display = '';
                     } else{
-                      doc_option_n$id_eleve.parentNode.style.display = 'none';
+                      // input
+                      doc_input_option_n$id_eleve.style.display = '';
+                      doc_input_CCF_n$id_eleve.style.display = '';
+
+                      doc_option_n$id_eleve.style.display = 'none';
+                      doc_CCF_n$id_eleve.style.display = 'none';
+                    }
+                  }
+                  doc_option_n$id_eleve.onchange = function()
+                  {  
+                    var select_n$id_eleve = doc_option_n$id_eleve.options.selectedIndex
+
+                    if(doc_option_n$id_eleve.options[select_n$id_eleve].value == 'SLAM'){
+                      doc_CCF_n$id_eleve.options.E5SLAM.style.display = '';
+                      doc_CCF_n$id_eleve.options.E5SISR.style.display = 'none';
+
+                    } else{
+
+                      doc_CCF_n$id_eleve.options.E5SLAM.style.display = 'none';
+                      doc_CCF_n$id_eleve.options.E5SISR.style.display = '';
                     }
                   }
                   </script>";
