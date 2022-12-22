@@ -42,9 +42,9 @@
     var inputElems = document.querySelectorAll("input");
     
     selectElem.onchange = function()  {
-      for(let i = 0; i < inputElems.length; i++) {
-        inputElems[i].value = "";
-      }
+      // for(let i = 0; i < inputElems.length; i++) {
+      //   inputElems[i].value = "";
+      // }
     
       if(selectElem.value === "États-Unis") {
         inputElems[2].parentNode.style.display = "inline";

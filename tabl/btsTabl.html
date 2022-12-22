@@ -1,0 +1,57 @@
+<head>
+  <meta charset="utf-8">
+  <!-- <script type= "text/javascript" src="tabl.js"></script> -->
+  <link rel="stylesheet" href="tabl.css">
+</head>
+<form>
+ 
+  <div>
+    <label for="country">Veuillez choisir votre BTS :</label>
+    <select id="bts" name="bts">
+      <option>SIO</option>
+      <option selected>NRC</option>
+      <option>CI</option>
+      <option>COM</option>
+      <option>CG</option>
+      <option>NDRC</option>
+      <option>PI</option>
+      <option>SAM</option>
+      <option>TOU</option>
+    </select>
+  </div>
+  <div>
+    <p>Veuillez saisir votre option</p>
+    <select id="option" name="option">
+      <option>SLAM</option>
+      <option selected>SISR</option>
+    </select>
+    <!-- <span class="option">
+      <input id="option" name="option" type="tel" required
+             placeholder="Code régional" pattern="[0-9]{3}"
+             aria-label="Code régional">
+      <span class="validity"></span>
+    </span> -->
+  </div>
+  <div>
+    <select id="epreuve" name="option">
+      <option>SLAM</option>
+      <option selected>SISR</option>
+    </select>
+  </div>
+  <div>
+    <button>Envoyer</button>
+  </div>
+  <script>
+    var bts = document.querySelector('select[name="bts"]')
+    var option = document.querySelector('select[name="option"]')
+    
+    option.onchange = function()  {  
+      if(bts.value === "SIO") {
+        if(option.options[1].value == "SISR"){
+          option.options[1].selected = true
+        }
+      }
+    }
+    
+      </script>
+</form>

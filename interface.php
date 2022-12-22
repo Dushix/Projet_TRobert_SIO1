@@ -3,7 +3,7 @@ require ('./ConnectionMySQL.php') ;
 $connection = getConnection();
 
 
-$sql_eleves = "SELECT nom_eleve, prenom_eleve, code_bts, code_option FROM eleves INNER JOIN liste_des_bts ON ID_BTS = fk_ID_OPTION";
+$sql_eleves = "SELECT ID_ELEVE, nom_eleve, prenom_eleve, code_bts, code_option FROM eleves INNER JOIN liste_des_bts ON ID_BTS = fk_ID_OPTION";
 $info_eleves = $connection->prepare($sql_eleves);
 $info_eleves->execute();
 $info_eleves = $info_eleves->fetchAll();
@@ -21,6 +21,10 @@ $info_eleves = $info_eleves->fetchAll();
        <meta charset="utf-8">
         <link rel="stylesheet" href="note.css" media="screen" type="text/css" />
         <title>Note CCF</title>
+        <script>
+                            var bts = document.querySelector('select[name="bts"]')
+                  var option = document.querySelector('select[name="option"]')
+        </script>
     </head>
     <body>
         <div>
@@ -48,6 +52,9 @@ $info_eleves = $info_eleves->fetchAll();
                 foreach ($info_eleves as $key => $value) {
                   echo '<tr>';
                   foreach ($value as $sous_key => $sous_value) {
+                    if($sous_key == "ID_ELEVE"){
+                      $id_eleve = $sous_value;
+                    }
                     if($sous_key == "nom_eleve"){
                       $nom_eleve = $sous_value;
                     }
@@ -62,8 +69,27 @@ $info_eleves = $info_eleves->fetchAll();
                     }
                   }
                   echo "<td></td>";// Année scolaire
-                  echo "<td>$bts</td>";// BTS
-                  echo "<td>$option</td>";// Option
+                  echo "<td><select id='bts' name='bts_$id_eleve'>
+                        <option id='SIO'>SIO</option>
+                        <option id='CI'>CI</option>
+                        <option id='COM'>COM</option>
+                        <option id='CG'>CG</option>
+                        <option id='NDRC'>NDRC</option>
+                        <option id='PI'>PI</option>
+                        <option id='SAM'>SAM</option>
+                        <option id='TOU'>TOU</option>
+                        </select></td>";// BTS
+
+                  if($bts == "SIO"){
+                    echo "<td>
+                    <select name='option_$id_eleve'>
+                    <option id='SLAM'>SLAM</option>
+                    <option id='SISR'>SISR</option>
+                    </select>
+                  </td>";// Option
+                  }else{
+                    echo "<td></td>";// Option
+                  }
                   echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
                   echo "<td></td>";// Libelle CCF
                   echo "<td></td>";// Candidat
@@ -76,8 +102,36 @@ $info_eleves = $info_eleves->fetchAll();
                   echo "<td></td>";// Intervenant
                   echo "<td></td>";// COEFF
                   echo "<td></td>";// Commentaire
-  
                   echo '</tr>';
+
+
+                  $nom_bts = "bts_$id_eleve";
+                  $cible_bts = "name=$nom_bts";
+                  $doc_bts = "document.querySelector('select[$cible_bts]')";
+
+                  $nom_option = "option_$id_eleve";
+                  $cible_option = "name=$nom_option";
+                  $doc_option = "document.querySelector('select[$cible_option]')";
+
+                  echo "<script>
+                  var doc_bts_n$id_eleve = $doc_bts
+                  var doc_option_n$id_eleve = $doc_option
+
+                  doc_bts_n$id_eleve.options.$bts.selected = true
+                  doc_option_n$id_eleve.options.$option.selected = true
+
+                  doc_bts_n$id_eleve.onchange = function()
+                  {  
+                    var select_n$id_eleve = doc_bts_n$id_eleve.options.selectedIndex
+
+                    if(doc_bts_n$id_eleve.options[select_n$id_eleve].value == 'SIO'){
+                      doc_option_n$id_eleve.parentNode.style.display = 'inline';
+                    } else{
+                      doc_option_n$id_eleve.parentNode.style.display = 'none';
+                    }
+                  }
+                  </script>";
+
               }
                 ?>
 
