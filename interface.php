@@ -3,7 +3,7 @@ require ('./ConnectionMySQL.php') ;
 $connection = getConnection();
 
 
-$sql_eleves = "SELECT ID_ELEVE, nom_eleve, prenom_eleve, code_bts, code_option FROM eleves INNER JOIN liste_des_bts ON ID_BTS = fk_ID_OPTION";
+$sql_eleves = "SELECT ID_ELEVE, nom_eleve, prenom_eleve, code_bts, code_option FROM eleves INNER JOIN options_bts ON fk_ID_OPTION = ID_OPTION JOIN liste_des_bts ON fk_ID_BTS = ID_BTS";
 $info_eleves = $connection->prepare($sql_eleves);
 $info_eleves->execute();
 $info_eleves = $info_eleves->fetchAll();
