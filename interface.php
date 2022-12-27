@@ -40,10 +40,10 @@ $info_eleves = $info_eleves->fetchAll();
                 <th>Date examin</th>
                 <th>Durée de l’épreuve</th>
                 <th>Heure de convocation</th>
-                <th>Note obtenue</th>
                 <th>Professeur</th>
                 <th>Numen</th>
                 <th>Intervenant</th>
+                <th>Note obtenue</th>
                 <th>COEFF</th>
                 <th>Commentaire</th>
                 </tr>
@@ -102,10 +102,10 @@ $info_eleves = $info_eleves->fetchAll();
                   echo "<td></td>";// Date examin
                   echo "<td></td>";// Durée de l’épreuve
                   echo "<td></td>";// Heure de convocation
-                  echo "<td></td>";// Note obtenue
                   echo "<td></td>";// Professeur
                   echo "<td></td>";// Numen
                   echo "<td></td>";// Intervenant
+                  echo "<td></td>";// Note obtenue
                   echo "<td></td>";// COEFF
                   echo "<td></td>";// Commentaire
                   echo '</tr>';
