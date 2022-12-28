@@ -54,6 +54,36 @@ if(!empty($bts_classe)){
     
         if($err_bts == false && $err_option == false && $err_CCF == false){
             echo "gg";
+            require ('./ConnectionMySQL.php') ;
+            $connection = getConnection();
+
+
+            $sql_classe = "SELECT Nom_classe FROM classes INNER JOIN liste_des_bts  ON fk_ID_BTS = ID_BTS WHERE code_bts='$bts_classe'";
+            $info_classe = $connection->prepare($sql_classe);
+            $info_classe->execute();
+            $info_classe = $info_classe->fetchAll();
+            print_r($info_classe);
+
+            echo "
+            <td>
+                    <select name='option'>";
+            foreach ($info_classe as $key => $value) {
+                foreach ($value as $sous_key => $sous_value) {
+                    if($sous_key == "Nom_classe"){
+                        $Nom_cl = $sous_value;
+                      }
+                }
+                echo "<option id='$Nom_cl'>$Nom_cl</option>";
+    
+            }
+            echo "
+            </td>
+                    </select>";
+            // $sql_lignes = 'SELECT COUNT(*) AS "lignes" FROM eleves';
+            // $nombre_lignes = $connection->prepare($sql_lignes);
+            // $nombre_lignes->execute();
+            // $nombre_lignes = $nombre_lignes->fetchAll();
+            // $nom_lign = $nombre_lignes[0]["lignes"];
         } else{
             echo "non";
         }

@@ -1,7 +1,6 @@
 <?php
+echo session_save_path();
 session_start();
-$_SESSION['prenom'] = 'Pierre';
-    $_SESSION['age'] = 29;
 if (isset($_POST['soumettre'])){
     $utilisateur = (isset($_POST['identifiant'])) ? $_POST['identifiant'] : null;
     $password = (isset($_POST['motDePasse'])) ? $_POST['motDePasse'] : null;
@@ -27,6 +26,7 @@ if ( $resultat == NULL) {
     echo '<td>identifiant ou mots de passe incorrect</td>';
     echo '</tr>';
     echo '</table>';
+    header('Location: ./Module_authentification.html'); 
 } else {
 
     $hashDuMotDePasse = $resultat[0]["motDePasse"];
@@ -35,12 +35,13 @@ if ( $resultat == NULL) {
 $pass_verif = password_verify($password, $hashDuMotDePasse);
 
 if ($pass_verif == true){
+    $_SESSION['identifiant'] = "$utilisateur";
+    $_SESSION['hashDuMotDePasse'] = "$hashDuMotDePasse";
     echo '<table>';
     echo '<tr>';
     echo '<td>Le mot de passe est valide</td>';
     echo '</tr>';
     echo '</table>';
-    
         } else {
             session_destroy();
             $code_err = 99;
