@@ -23,7 +23,7 @@ $info_eleves = $info_eleves->fetchAll();
         <title>Note CCF</title>
     </head>
     <body>
-    <form name="Formulaire" action="interfacevf.php" method="post">
+    <form name="Formulaire" action="interface2.php" method="post">
         <div>
           <td> 
           <label name="bts_classe">Quelle BTS voulez vous voir : </label>

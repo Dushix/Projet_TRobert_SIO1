@@ -1,70 +1,17 @@
-<?php
-print_r($_POST);
-if (isset($_POST['soumettre'])){
-  $bts_classe = (isset($_POST['bts_classe'])) ? $_POST['bts_classe'] : null;
-  $option_classe = (isset($_POST['option_classe'])) ? $_POST['option_classe'] : null;
-  $CCF_classe = (isset($_POST['CCF_classe'])) ? $_POST['CCF_classe'] : null;
-}
-if(!empty($bts_classe)){
-  $tabl_bts = [
-      'SIO',
-      'CI',
-      'COM',
-      'CG',
-      'NDRC',
-      'PI',
-      'SAM',
-      'TOU'
-  ];
-  $err_bts = true;
-
-  if(!empty($option_classe)&&!empty($CCF_classe)){
-
-
-      $tabl_option = [
-          'SLAM',
-          'SISR',
-          'Les 2 options'
-      ];
-      $err_option = true;
-  
-      $tabl_CCF = [
-          'E4',
-          'E5SISR',
-          'E5SLAM'
-      ];
-      $err_CCF = true;
-  
-      foreach($tabl_bts as $tbts){
-          if($tbts === $bts_classe){
-              $err_bts = false;
-          }
-      }
-  
-      foreach($tabl_option as $toption){
-          if($toption === $option_classe){
-              $err_option = false;
-          }
-      }
-  
-      foreach($tabl_CCF as $tCCF){
-          if($tCCF === $CCF_classe){
-              $err_CCF = false;
-          }
-      }
-  
-      if($err_bts == false && $err_option == false && $err_CCF == false){
-
-          require ('./ConnectionMySQL.php') ;
+<?php 
+        require ('./ConnectionMySQL.php') ;
           $connection = getConnection();
 
+  $bts_classe = "SIO";
+  $option_classe = "SLAM";
+  $CCF_classe = "E4";
 
           $sql_classe = "SELECT Nom_classe FROM classes INNER JOIN liste_des_bts  ON fk_ID_BTS = ID_BTS WHERE code_bts='$bts_classe'";
           $info_classe = $connection->prepare($sql_classe);
           $info_classe->execute();
           $info_classe = $info_classe->fetchAll();
 
-          echo "<form name='Formulaire' action='interface2.php' method='get'><td><select name='option'>";
+          echo "<form name='Formulaire' action='int.php' method='get'><td><select name='option'>";
 
           foreach ($info_classe as $key => $value) {
               foreach ($value as $sous_key => $sous_value) {
@@ -72,11 +19,12 @@ if(!empty($bts_classe)){
                       $Nom_cl = $sous_value;
                     }
               }
+              $Nom_cl = $_GET['option'];
               echo "<option id='$Nom_cl'>$Nom_cl</option>";
   
           }
           echo "</td></select>";
-
+          
           if($option_classe === "Les 2 options"){
             $cible_op='';
           } else {
@@ -177,15 +125,4 @@ echo "
                   echo "<td></td>";// COEFF
                   echo "<td></td>";// Commentaire
                   echo '</tr>';
-              }
-              echo "</table></div></body></html>";
-
-      } else{
-          echo "non";
-      }
-  } else {
-      echo '<h1>Le site est en cour de maintenance, merci de revenir en arriére</h1>';
-  }
-} else {
-  echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
-}
+                }
