@@ -1,121 +1,107 @@
-
-div {
-  margin-bottom: 10px;
-  position: relative;
-}
-
-input[type="number"] {
-  width: 100px;
-}
-
-input + span {
-  padding-right: 30px;
-}
-
-input:invalid+span:after {
-  position: absolute; content: '✖';
-  padding-left: 5px;
-  color: #8b0000;
-}
-
-input:valid+span:after {
-  position: absolute;
-  content: '✓';
-  padding-left: 5px;
-  color: #009000;
-}
-
-.inv{
-  background: transparent;
-  border: none !important;
-  font-size:0;
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display");
+body, .message, .form, form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 body {
-/*width: 100%;*/  
-min-height: 90vh;
-display: -webkit-box;
-display: -webkit-flex;
-display: -moz-box;
-display: -ms-flexbox;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-align-items: center;
-padding: 15px;
-
-background-repeat: no-repeat;
-background: url(https://www.enc-bessieres.org/wp-content/uploads/2021/01/IMG_5270.jpg);
-background-position: center;
-background-size: cover;
-position: relative;
-z-index: 1;  
+  height: 100vh;
+  background: #e8e8e8;
+  font-family: "Source Sans Pro", sans-serif;
+  overflow: hidden;
 }
-.divinput {
-  width: 100%;
+.container {
+  width: 700px;
+  height: 400px;
+  background: white;
   position: relative;
-  border-bottom: 2px solid rgba(255,255,255,0.24);
-  margin-bottom: 30px;
+  display: grid;
+  grid-template: 100% / 50% 50%;
+  box-shadow: 2px 2px 10px 0 rgba(51, 51, 51, 0.2);
 }
-
-.inputc {
-  font-family: Poppins-Regular;
-  font-size: 16px;
-  color: rgb(49, 45, 45);
-  line-height: 1.2;
-
-  display: block;
-  width: 100%;
-  height: 45px;
-  background: transparent;
-  padding: 0 5px 0 38px;
-}
-.container-login100::before {
-  content: "";
-  display: block;
+.message {
   position: absolute;
-  z-index: -1;
+  background: white;
+  width: 50%;
+  height: 100%;
+  transition: 0.5s all ease;
+  transform: translateX(100%);
+  z-index: 4;
+}
+.message:before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 70%;
+  background: #c3c3d8;
+  opacity: 0;
+  left: 0;
+  top: 15%;
+}
+.message .button {
+  margin: 5px 0;
+}
+.signup:before {
+  opacity: 0.3;
+  left: 0;
+}
+.login:before {
+  opacity: 0.3;
+  left: 100%;
+}
+.btn-wrapper {
+  width: 60%;
+}
+.form {
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(255,255,255,0.9);
 }
-
-.back {
-  /* From https://css.glass */
-background: rgba(255, 255, 255, 0.51);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(8.3px);
--webkit-backdrop-filter: blur(8.3px);
-padding: 55px 55px 37px 55px;
-  /*widtvbcxvbh: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 55px 55px 37px 55px;
-
-  background: #9152f8;
-  background: -webkit-linear-gradient(top, #7579ff, #b224ef);
-  background: -o-linear-gradient(top, #7579ff, #b224ef);
-  background: -moz-linear-gradient(top, #7579ff, #b224ef);
-  background: linear-gradient(top, #7579ff, #b224ef);*/
+.form--heading {
+  font-size: 25px;
+  height: 50px;
+  color: #8288ff;
+  font-family: "Source Sans Pro", sans-serif;
 }
-table{
-  /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.51);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.3px);
-  -webkit-backdrop-filter: blur(8.3px);
-  padding: 55px 55px 37px 55px;
-    /*widtvbcxvbh: 500px;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 55px 55px 37px 55px;
-  
-    background: #9152f8;
-    background: -webkit-linear-gradient(top, #7579ff, #b224ef);
-    background: -o-linear-gradient(top, #7579ff, #b224ef);
-    background: -moz-linear-gradient(top, #7579ff, #b224ef);
-    background: linear-gradient(top, #7579ff, #b224ef);*/
+.form--signup {
+  border-right: 1px solid #999;
+}
+form {
+  width: 70%;
+}
+form > * {
+  margin: 10px;
+}
+form input {
+  width: 90%;
+  border: 0;
+  border-bottom: 1px solid #aaa;
+  font-size: 13px;
+  font-weight: 300;
+  color: #797a9e;
+  letter-spacing: 0.11em;
+}
+form input::placeholder {
+  color: #333;
+  font-size: 10px;
+}
+form input:focus {
+  outline: 0;
+  border-bottom: 1px solid rgba(128, 155, 206, 0.7);
+  transition: 0.6s all ease;
+}
+.button {
+  width: 100%;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  position: relative;
+  z-index: 3;
+  background: #8288ff;
+  font-family: "Source Sans Pro", sans-serif;
+  cursor: pointer;
 }
