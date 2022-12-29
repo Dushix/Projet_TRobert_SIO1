@@ -121,28 +121,9 @@ if (isset($_GET['erreur'])){
       <button class="button">Login</button>
     </form>
   </div>
-  
 </div>
-
-
     </body>
- 
-    <script>
-        $("#signup").click(function() {
-        $(".message").css("transform", "translateX(100%)");
-        if ($(".message").hasClass("login")) {
-            $(".message").removeClass("login");
-        }
-        $(".message").addClass("signup");
-        });
-
-        $("#login").click(function() {
-        $(".message").css("transform", "translateX(0)");
-        if ($(".message").hasClass("login")) {
-            $(".message").removeClass("signup");
-        }
-        $(".message").addClass("login");
-        });
-
-    </script>
 </html>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="enregistrement.js"></script>
