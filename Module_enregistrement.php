@@ -127,22 +127,27 @@ if (isset($_GET['erreur'])){
 
     </body>
  
-    <script>
-        $("#signup").click(function() {
-        $(".message").css("transform", "translateX(100%)");
-        if ($(".message").hasClass("login")) {
-            $(".message").removeClass("login");
+</html>
+<script>
+        var sig = document.querySelector('[class="button"]');
+        var mess = document.querySelector('div.message.signup');
+        var log = document.querySelector('button#login.button');
+
+        sig.click(function() {
+        mess.style.("transform", "translateX(100%)");
+        alert ("Votre mot de passe ne correspond pas avec la confirmation du Mot de passe");  
+        if (mess.hasClass("login")) {
+            mess.removeClass("login");
         }
-        $(".message").addClass("signup");
+        mess.addClass("signup");
         });
 
-        $("#login").click(function() {
-        $(".message").css("transform", "translateX(0)");
-        if ($(".message").hasClass("login")) {
-            $(".message").removeClass("signup");
+        log.click(function() {
+            mess.css("transform", "translateX(0)");
+        if (mess.hasClass("login")) {
+            mess.removeClass("signup");
         }
-        $(".message").addClass("login");
+        mess.addClass("login");
         });
 
     </script>
-</html>
