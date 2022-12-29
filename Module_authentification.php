@@ -1,3 +1,18 @@
+<?php 
+if (isset($_GET['erreur'])){
+    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
+} if(!empty($erreur)){
+    echo($erreur);
+    if("$erreur"==="862"){
+        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+    }
+
+    if("$erreur"==="99"){
+        echo '<script type="text/javascript">alert("identifiant ou mots de passe incorrect");</script>';
+    }
+
+}
+?>
 <html>
     <head>
        <meta charset="utf-8">

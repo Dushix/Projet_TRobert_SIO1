@@ -1,5 +1,4 @@
 <?php
-echo session_save_path();
 session_start();
 if (isset($_POST['soumettre'])){
     $utilisateur = (isset($_POST['identifiant'])) ? $_POST['identifiant'] : null;
@@ -26,7 +25,7 @@ if ( $resultat == NULL) {
     echo '<td>identifiant ou mots de passe incorrect</td>';
     echo '</tr>';
     echo '</table>';
-    header('Location: ./Module_authentification.html'); 
+    header("Location: ./Module_authentification.php?$code_err"); 
 } else {
 
     $hashDuMotDePasse = $resultat[0]["motDePasse"];
@@ -50,7 +49,7 @@ if ($pass_verif == true){
             echo '<td>identifiant ou mots de passe incorrect</td>';
             echo '</tr>';
             echo '</table>';
-            header('Location: ./Module_authentification.html');  
+            header("Location: ./Module_authentification.php?erreur=$code_err");  
             }
     } 
 
@@ -59,7 +58,7 @@ else {
 session_destroy();
 $code_err = 862;
 echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
-header('Location: ./Module_authentification.html');
+header("Location: ./Module_authentification.php?erreur=$code_err");
 }
 
 ?>

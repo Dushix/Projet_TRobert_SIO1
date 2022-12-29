@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="enregistrement.css">
+    <link rel="stylesheet" href="#">
     <title>Module d’enregistrement</title>
     
 </head>
@@ -81,7 +81,7 @@ if ($erreur === false) {
     echo '<td>Compte créé</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
+    echo '<td><a href="Module_authentification.html" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 
@@ -91,7 +91,7 @@ if ($erreur === false) {
     echo '<td>Vous avez déja un compte</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
+    echo '<td><a href="Module_authentification.html" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 }
@@ -100,26 +100,39 @@ if ($erreur === false) {
     echo '<table>';
     echo '<tr>';
     echo '<td>';
-    echo "vous n'êtes pas enseignant";
+    echo "Vous n'êtes pas enseignant";
     echo'</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="#" >Clique ici pour revenir à ...</a></td>';
+    echo '<td>';
+    echo "<br>Ces informations suivantes ont été enregistrée, et pourront étre utilisé contre vous si vous recommencer !!!";
+    echo'</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td>';
+    echo '-Adresse IP.<br>
+    -Adresse Mac.<br>
+    -Localisation.<br>
+    -Nom de votre Machine.<br>
+    -Marque de la Machine.<br>
+    -Nom de Session.';
+    echo '</td>';
     echo '</tr>';
     echo '</table>';
 }
 } else {
     echo '<table>';
     echo '<tr>';
-    echo '<td>Ton mots de passe est incorrect</td>';
+    echo '<td>Ton mot de passe est incorrect</td>';
     echo '</tr>';
     echo '</table>';
-    header('Location: Module_enregistrement.html');    
+    $code_err = 762;
+    header("Location: Module_enregistrement.php?erreur=$code_err");    
     exit();
 }
     } else {
     $code_err = 862;
-    header("Location: Module_enregistrement.html?erreur=$code_err");    
+    header("Location: Module_enregistrement.php?erreur=$code_err");    
     exit();
     }
 ?>

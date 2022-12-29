@@ -1,3 +1,18 @@
+<?php 
+if (isset($_GET['erreur'])){
+    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
+} if(!empty($erreur)){
+    echo($erreur);
+    if("$erreur"==="862"){
+        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+    }
+
+    if("$erreur"==="762"){
+        echo '<script type="text/javascript">alert("Votre mot de passe est incorrect");</script>';
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -34,7 +49,7 @@
 
                     <tr>
                         <td>Saisissez NUMEN :</td>
-                        <td><input type="text" name="numen" maxlength="13" pattern="[a-zA-0-9]{13}" required></td>
+                        <td><input type="text" name="numen" minlength="13" maxlength="13" pattern="[a-zA-0-9]{13}" required></td>
                     </tr>
 
                     <tr>
@@ -61,27 +76,11 @@
                     </tr>
             </form>
         </div>
-            <script>
+            <script type="text/javascript">
                     var pas = document.querySelector('[name="password"]');
                     var con = document.querySelector('[name="confirm_password"]');
                     var sub = document.querySelector('[type="submit"]');
                     var but = document.querySelector('[type="button"]');
-                    var errMessage = document.querySelector('[name="abc"]');
-                    var Message = document.createTextNode('Erreur de saisie');
-                    var cre = document.createElement('tr')
-                    const input = document.querySelector('input')
-                    const log = document.getElementById('log') 
-
-                    // input.addEventListener('invalid', (e) => {
-                    // log.appendChild(Object.assign(
-                    //     document.createElement('li'),
-                    //     { textContent: JSON.stringify(e.target.value) }
-                    // ))
-                    // })
-
-                    // input.addEventListener('invalid',log.appendChild(Object.assign(
-                    //     document.createTextNode('Erreur de saisie')))
-                    // )
 
                     but.addEventListener('click', testvf);
 
@@ -91,9 +90,8 @@
                             // $('.button').prop('disabled', false);
                             // document.forms["Formulaire"].submit();  
                         } else {
-                            pas.id = "erreurpass";
-                            errMessage.appendChild(cre,Message);                   
-                            alert ("NON");  
+                            pas.id = "erreurpass";                  
+                            alert ("Votre mot de passe ne correspond pas avec la confirmation du Mot de passe");  
                         }
                     }
 
