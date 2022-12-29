@@ -31,8 +31,8 @@ input:valid+span:after {
   font-size:0;
 }
 body {
-width: 100%;  
-min-height: 100vh;
+/*width: 100%;*/  
+min-height: 90vh;
 display: -webkit-box;
 display: -webkit-flex;
 display: -moz-box;
