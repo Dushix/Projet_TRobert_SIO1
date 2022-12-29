@@ -1,22 +1,28 @@
-<?php
-require ('./ConnectionMySQL.php') ;
-$connection = getConnection();
-
-
-$sql_eleves = "SELECT ID_ELEVE, nom_eleve, prenom_eleve, code_bts, code_option FROM eleves INNER JOIN options_bts ON fk_ID_OPTION = ID_OPTION JOIN liste_des_bts ON fk_ID_BTS = ID_BTS";
-$info_eleves = $connection->prepare($sql_eleves);
-$info_eleves->execute();
-$info_eleves = $info_eleves->fetchAll();
-
-
-// $sql_lignes = 'SELECT COUNT(*) AS "lignes" FROM eleves';
-// $nombre_lignes = $connection->prepare($sql_lignes);
-// $nombre_lignes->execute();
-// $nombre_lignes = $nombre_lignes->fetchAll();
-// $nom_lign = $nombre_lignes[0]["lignes"];
+<?php 
+if (isset($_POST['soumettre'])){
+    $bts_classe = (isset($_POST['bts_classe'])) ? $_POST['bts_classe'] : null;
+}
+$err_bts = true;
+    if(!empty($bts_classe)){
+    $tabl_bts = [
+        'SIO',
+        'CI',
+        'COM',
+        'CG',
+        'NDRC',
+        'PI',
+        'SAM',
+        'TOU'
+    ];
+    foreach($tabl_bts as $tbts){
+      if($tbts === $bts_classe){
+          $err_bts = false;
+      }
+  }
+} else
+    
 ?>
-
-<html>
+    <html>
     <head>
        <meta charset="utf-8">
         <link rel="stylesheet" href="note.css" media="screen" type="text/css" />
@@ -25,20 +31,36 @@ $info_eleves = $info_eleves->fetchAll();
     <body>
     <form name="Formulaire" action="interface2.php" method="post">
         <div>
+        <form name="rep" action="interface0.php" method="post">
           <td> 
           <label name="bts_classe">Quelle BTS voulez vous voir : </label>
-            <select name='bts_classe'>
-              <option id='0'>--Choisissez le BTS--</option>
-              <option id='SIO'>SIO</option>
-              <option id='CI'>CI</option>
-              <option id='COM'>COM</option>
-              <option id='CG'>CG</option>
-              <option id='NDRC'>NDRC</option>
-              <option id='PI'>PI</option>
-              <option id='SAM'>SAM</option>
-              <option id='TOU'>TOU</option>
+            <select name="bts_classe">
+              <option id="0">--Choisissez le BTS--</option>
+              <option id="SIO">SIO</option>
+              <option id="CI">CI</option>
+              <option id="COM">COM</option>
+              <option id="CG">CG</option>
+              <option id="NDRC">NDRC</option>
+              <option id="PI">PI</option>
+              <option id="SAM">SAM</option>
+              <option id="TOU">TOU</option>
             </select>
           </td>
+        </from>
+          <?php
+
+            if($err_bts == false){
+
+              require ('./ConnectionMySQL.php') ;
+              $connection = getConnection();
+              $sql_classe = "SELECT Nom_classe FROM classes INNER JOIN liste_des_bts  ON fk_ID_BTS = ID_BTS WHERE code_bts='$bts_classe'";
+              $info_classe = $connection->prepare($sql_classe);
+              $info_classe->execute();
+              $info_classe = $info_classe->fetchAll();
+
+              print_r($info_classe);
+            }
+          ?>
 
           <td>
           <label name="option_classe">Dans quelle option : </label>
@@ -92,6 +114,7 @@ $info_eleves = $info_eleves->fetchAll();
                           doc_CCF_cl.options.E5SLAM.style.display = ''
                         }
                       }
+                      document.forms['rep'].submit();
                     } else {
                       doc_option_cl[0].selected = true;
                       doc_option_cl.value = 'rien';
@@ -107,6 +130,6 @@ $info_eleves = $info_eleves->fetchAll();
             </script>
 
         </div>
-                </from>
+      </from>
     </body>
 </html>
