@@ -91,13 +91,17 @@ echo "
 <html>
     <head>
        <meta charset='utf-8'>
-        <link rel='stylesheet' href='note.css' media='screen' type='text/css' />
+        <link rel='stylesheet' href='interface2.css' media='screen' type='text/css' />
         <title>Note CCF</title>
     </head>
     <body>
+
+      <!--  <h1><span class='blue'>&lt;</span>Table<span class='blue'>&gt;</span> <span class='yellow'>Responsive</span></h1>-->
+
         <div>
           <h1>Saisie de Notes CCF</h1>
-            <table>
+            <table class=container>
+                <thead>
                 <tr>
                 <th>Année scolaire</th>
                 <th>BTS</th>
@@ -105,7 +109,7 @@ echo "
                 <th>Elèves</th>
                 <th>Libelle CCF</th>
                 <th>Candidat</th>
-                <th>Date examin</th>
+                <th>Date examen</th>
                 <th>Durée de l’épreuve</th>
                 <th>Heure de convocation</th>
                 <th>Professeur</th>
@@ -114,6 +118,7 @@ echo "
                 <th>Note obtenue</th>
                 <th>COEFF</th>
                 <th>Commentaire</th>
+                </thead>
                 </tr>";
 
                 foreach ($info_eleves as $key => $value) {
@@ -242,7 +247,7 @@ echo "
                     echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
                     echo "<td>$CCF_classe</td>";// CCF
                     echo "<td><input type='text' value='$N_Candi'></td>";// Candidat
-                    echo "<td></td>";// Date examin
+                    echo "<td></td>";// Date examen
                     echo "<td></td>";// Durée de l’épreuve
                     echo "<td></td>";// Heure de convocation
                     echo "<td></td>";// Professeur
