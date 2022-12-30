@@ -222,7 +222,7 @@ echo "
                       echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
                       echo "<td>$CCF_classe</td>";// CCF
                       echo "<td><input type='text' value='$N_Candi'></td>";// Candidat
-                      echo "<td><input type='date' value='$DATE_EVAL'></td>";// Date examin
+                      echo "<td><input min='$ann1-01-01' max='$ann2-12-31' type='date' value='$DATE_EVAL'></td>";// Date examin
                       echo "<td><input type='time' value='$DUREE_EVAL'></td></td>";// Durée de l’épreuve
                       echo "<td><input type='time' value='$HEURE_EVAL'></td>";// Heure de convocation
                       echo "<td>$Nom_enseignant</td>";// Professeur
