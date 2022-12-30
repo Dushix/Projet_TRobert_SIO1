@@ -149,8 +149,8 @@ if ($erreur === false) {
     exit();
 }
     } else {
-    $code_err = 862;
-    header("Location: Module_enregistrement.php?erreur=$code_err");    
+    print_r($_POST);
+    // header("Location: Module_enregistrement.php?erreur=$code_err");    
     exit();
     }
 ?>
