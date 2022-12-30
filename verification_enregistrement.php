@@ -22,9 +22,11 @@ if ("$password" == "$confirm_password") {
 require ('./ConnectionMySQL.php') ;
 
 $connection = getConnection();
-$sql_fk_id = "SELECT Numen FROM enseignants WHERE Numen= ?";
+$sql_fk_id = "SELECT * FROM enseignants e WHERE e.Numen= :numen AND e.Nom_enseignant= :Nom AND e.Prenom_enseignant= :Prenom";
 $fk_id_verif = $connection->prepare($sql_fk_id);
-$fk_id_verif->bindParam(1, $numen, PDO::PARAM_STR);
+$fk_id_verif->bindParam(':numen', $numen, PDO::PARAM_STR);
+$fk_id_verif->bindParam(':Nom', $nom, PDO::PARAM_STR);
+$fk_id_verif->bindParam(':Prenom', $prenom, PDO::PARAM_STR);
 $fk_id_verif->execute();
 $resultat_fk_id = $fk_id_verif->fetchAll();
 
@@ -61,7 +63,6 @@ if ($erreur === false) {
     $hashDuMotDePasse = password_hash($password, PASSWORD_DEFAULT);
 
     $statement = $connection->prepare("INSERT INTO COMPTES(fk_id_enseignant,nom,prenom,email,telephone,Numen,identifiant,MotDePasse) VALUES(:fk_id_enseignant,:nom,:prenom,:email,:telephone,:numen,:identifiant,:motdepasse)");
-    // echo($nom, $prenom, $email, $telephone, $utilisateur, $password);
     $statement->bindParam(':fk_id_enseignant', $fk_id_enseignant, PDO::PARAM_STR);
     $statement->bindParam(':nom', $nom, PDO::PARAM_STR);
     $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -70,18 +71,14 @@ if ($erreur === false) {
     $statement->bindParam(':numen', $numen, PDO::PARAM_STR);
     $statement->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
     $statement->bindParam(':motdepasse', $hashDuMotDePasse, PDO::PARAM_STR);
-    // echo ("<br>$statement");
-    // echo ("$nom, $prenom, $email, $telephone, $username, $hashDuMotDePasse");
-    //     print_r($statement);
     $statement->execute() ;
-    // $connection->query($statement);
 
     echo '<table>';
     echo '<tr>';
     echo '<td>Compte créé</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="Module_authentification.html" >Cliquez ici pour vous connecter.</a></td>';
+    echo '<td><a href="Module_authentification.php" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 
@@ -91,7 +88,7 @@ if ($erreur === false) {
     echo '<td>Vous avez déja un compte</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="Module_authentification.html" >Cliquez ici pour vous connecter.</a></td>';
+    echo '<td><a href="Module_authentification.php" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 }
@@ -118,7 +115,28 @@ if ($erreur === false) {
     -Nom de Session.';
     echo '</td>';
     echo '</tr>';
+    echo '<tr>';
+    echo '<td>';
+    echo "<input type='button' value='+' />";
+    echo'</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td>';
+    echo "<p>Votre Nom, Prénom ou Numen est invalides<p>";
+    echo'</td>';
+    echo '</tr>';
     echo '</table>';
+    echo "
+    <script type='text/javascript'>
+        var but = document.querySelector('[type=button]');
+        var mess = document.querySelector('p');
+        mess.style.display = 'none';
+
+        but.addEventListener('click', testvf);
+                        function testvf() {
+                            mess.style.display = '';
+                        }
+    </script>";
 }
 } else {
     echo '<table>';

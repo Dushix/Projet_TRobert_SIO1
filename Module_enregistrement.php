@@ -24,7 +24,7 @@ if (isset($_GET['erreur'])){
     </head>
 
     <body>
-        <!--<div class="back">
+        <div class="back">
             <form name="Formulaire" action="verification_enregistrement.php" method="post">
                 <table>
                     <tr>
@@ -95,9 +95,9 @@ if (isset($_GET['erreur'])){
                         }
                     }
 
-            </script>-->
+            </script>
 
-<div class="container">
+<!-- <div class="container">
   <div class="message signup">
     <div class="btn-wrapper">
       <button class="button" id="signup">Sign Up</button>
@@ -122,13 +122,13 @@ if (isset($_GET['erreur'])){
     </form>
   </div>
   
-</div>
+</div>-->
 
 
     </body>
  
 </html>
-<script>
+<!--<script>
         var sig = document.querySelector('[class="button"]');
         var mess = document.querySelector('div.message.signup');
         var log = document.querySelector('button#login.button');
@@ -150,4 +150,4 @@ if (isset($_GET['erreur'])){
         mess.addClass("login");
         });
 
-    </script>
+    </script> -->
