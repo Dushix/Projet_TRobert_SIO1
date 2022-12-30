@@ -185,7 +185,7 @@
             <!-- Autentification -->
             <div class="form form--login">
                 <div class="form--heading">Content de vous revoir! </div>
-                <form autocomplete="off">
+                <form action="verification_authentification.php" method="POST">
                 <input type="text" placeholder="Identifiant" class="inputc" name="identifiant" required>
                 <input type="password" placeholder="Mot de passe" class="inputc" name="motDePasse" required>
                 <button class="submit" name="soumettre" value='LOGIN'>Se connecter</button>
