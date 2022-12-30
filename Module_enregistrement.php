@@ -1,24 +1,10 @@
-<?php 
-if (isset($_GET['erreur'])){
-    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
-} if(!empty($erreur)){
-    echo($erreur);
-    if("$erreur"==="862"){
-        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
-    }
 
-    if("$erreur"==="762"){
-        echo '<script type="text/javascript">alert("Votre mot de passe est incorrect");</script>';
-    }
-
-}
-?>
 <!DOCTYPE html>
 <html>
 
     <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="enregistrement.css">
+    <link rel="stylesheet" href="./enregistrement.css">
     <title>Module d’enregistrement</title>
 
     </head>
@@ -124,7 +110,10 @@ if (isset($_GET['erreur'])){
                     var sub = document.querySelector('[type="submit"]');
                     var but = document.querySelector('[type="button"]');
 
-                    but.addEventListener('click', testvf);
+                    console.log(but);
+                    if (but) {
+                        but.addEventListener('click', testvf);
+                    }
 
                     function testvf() {
                         if (pas.value === con.value ) {
@@ -134,7 +123,7 @@ if (isset($_GET['erreur'])){
                         } else {
                             pas.id = "erreurpass";                  
                             alert ("Votre mot de passe ne correspond pas avec la confirmation du Mot de passe");  
-                        }
+                        }   
                     }
                 </script>
                 </form>
@@ -154,3 +143,21 @@ if (isset($_GET['erreur'])){
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="enregistrement.js"></script>
+
+
+
+<?php 
+if (isset($_GET['erreur'])){
+    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
+} if(!empty($erreur)){
+    //echo($erreur);
+    if("$erreur"==="862"){
+        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+    }
+
+    if("$erreur"==="762"){
+        echo '<script type="text/javascript">alert("Votre mot de passe est incorrect");</script>';
+    }
+
+}
+?>
