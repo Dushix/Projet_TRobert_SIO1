@@ -1,18 +1,4 @@
-<?php 
-if (isset($_GET['erreur'])){
-    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
-} if(!empty($erreur)){
-    //echo($erreur);
-    if("$erreur"==="862"){
-        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
-    }
 
-    if("$erreur"==="762"){
-        echo '<script type="text/javascript">alert("Votre mot de passe est incorrect");</script>';
-    }
-
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -180,13 +166,6 @@ if (isset($_GET['erreur'])){
                     var sub = document.querySelector('[type="submit"]');
                     var but = document.querySelector('[type="button"]');
 
-<<<<<<< HEAD
-=======
-                    // console.log(but);
-                    if (but) {
-                        but.addEventListener('click', testvf);
-                    }
->>>>>>> 368812429ea49eef58b71621a355c67cab22b267
 
          
                     but.addEventListener('click', testvf);
@@ -219,7 +198,6 @@ if (isset($_GET['erreur'])){
 
 
 
-<<<<<<< HEAD
 <?php 
 if (isset($_GET['erreur'])){
     $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
@@ -235,5 +213,3 @@ if (isset($_GET['erreur'])){
 
 }
 ?>
-=======
->>>>>>> 368812429ea49eef58b71621a355c67cab22b267
