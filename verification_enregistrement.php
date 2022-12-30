@@ -78,7 +78,7 @@ if ($erreur === false) {
     echo '<td>Compte créé</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="Module_authentification.php" >Cliquez ici pour vous connecter.</a></td>';
+    echo '<td><a href="Module_enregistrement.php" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 
@@ -88,7 +88,7 @@ if ($erreur === false) {
     echo '<td>Vous avez déja un compte</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="Module_authentification.php" >Cliquez ici pour vous connecter.</a></td>';
+    echo '<td><a href="Module_enregistrement.php" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 }
