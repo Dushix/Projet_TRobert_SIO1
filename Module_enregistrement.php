@@ -137,7 +137,6 @@
         });
 
     </script> -->
-            </script>-->
         <form name="Formulaire" action="verification_enregistrement.php" method="post">
             <div class="container">
             <div class="message signup">
@@ -146,6 +145,8 @@
                 <button class="button" id="login">Se connecter</button>
                 </div>
             </div>
+
+            <!-- Enregistrement -->
             <div class="form form--signup">
                 <div class="form--heading">Bonjour! Enregistrez-vous</div>
                 <form autocomplete="off">
@@ -157,7 +158,7 @@
                 <input type="text" placeholder="Identifiant" name="identifiant" minlength="4" pattern="[a-zA-Z0-9]{4,16}"required>
                 <input type="password" placeholder="mot de passe" class="vide" name="password" minlength="8" required>
                 <input type="password" placeholder="Confirmation de mot de passe" class="vide" name="confirm_password" minlength="8" required>
-                <button type="button" value="OK">S'enregistrer</button>
+                <button type="button" id="button" value="OK">S'enregistrer</button>
                 <input hidden type="submit" name="soumettre" value="OK"/>
 
                 <script type="text/javascript">
@@ -180,12 +181,14 @@
                 </script>
                 </form>
             </div>
+
+            <!-- Autentification -->
             <div class="form form--login">
                 <div class="form--heading">Content de vous revoir! </div>
                 <form autocomplete="off">
-                <input type="text" placeholder="Name">
-                <input type="password" placeholder="Password">
-                <button class="button">Se connecter</button>
+                <input type="text" placeholder="Identifiant" class="inputc" name="identifiant" required>
+                <input type="password" placeholder="Mot de passe" class="inputc" name="motDePasse" required>
+                <button class="submit" name="soumettre" value='LOGIN'>Se connecter</button>
                 </form>
             </div>
             </div>
