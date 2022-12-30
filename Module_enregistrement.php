@@ -137,7 +137,6 @@
         });
 
     </script> -->
-            </script>-->
         <form name="Formulaire" action="verification_enregistrement.php" method="post">
             <div class="container">
             <div class="message signup">
@@ -157,7 +156,7 @@
                 <input type="text" placeholder="Identifiant" name="identifiant" minlength="4" pattern="[a-zA-Z0-9]{4,16}"required>
                 <input type="password" placeholder="mot de passe" class="vide" name="password" minlength="8" required>
                 <input type="password" placeholder="Confirmation de mot de passe" class="vide" name="confirm_password" minlength="8" required>
-                <button type="button" value="OK">S'enregistrer</button>
+                <button type="button" id="button" value="OK">S'enregistrer</button>
                 <input hidden type="submit" name="soumettre" value="OK"/>
 
                 <script type="text/javascript">

@@ -91,7 +91,7 @@ form input:focus {
   border-bottom: 1px solid rgba(128, 155, 206, 0.7);
   transition: 0.6s all ease;
 }
-.button {
+button{
   width: 80%;
   height: 30px;
   border: 0;
