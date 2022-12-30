@@ -1,5 +1,22 @@
+<?php 
+if (isset($_GET['erreur'])){
+    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
+} if(!empty($erreur)){
+    //echo($erreur);
+    if("$erreur"==="862"){
+        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+    }
 
-<!DOCTYPE html>
+    if("$erreur"==="762"){
+        echo '<script type="text/javascript">alert("Votre mot de passe est incorrect");</script>';
+    }
+
+    if("$erreur"==="99"){
+        echo '<script type="text/javascript">alert("identifiant ou mots de passe incorrect");</script>';
+    }
+
+}
+?>
 <html>
 
     <head>
@@ -198,21 +215,3 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="enregistrement.js"></script>
-
-
-
-<?php 
-if (isset($_GET['erreur'])){
-    $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
-} if(!empty($erreur)){
-    //echo($erreur);
-    if("$erreur"==="862"){
-        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
-    }
-
-    if("$erreur"==="762"){
-        echo '<script type="text/javascript">alert("Votre mot de passe est incorrect");</script>';
-    }
-
-}
-?>
