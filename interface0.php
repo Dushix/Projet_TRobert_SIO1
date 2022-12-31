@@ -6,9 +6,9 @@
     </head>
     <body>
     <form name="Formulaire" action="interface2.php" method="post">
-        <div>
+        
           <td> 
-          <label name="bts_classe">Quelle BTS voulez vous voir : </label>
+          <label name="bts_classe">Quelle BTS voulez vous voir : </label><br>
             <select name="bts_classe">
               <option id="0">--Choisissez le BTS--</option>
               <option id="SIO">SIO</option>
@@ -19,26 +19,29 @@
               <option id="PI">PI</option>
               <option id="SAM">SAM</option>
               <option id="TOU">TOU</option>
-            </select>
+            </select><br>
           </td>
+        
           <td>
-          <label name="option_classe">Dans quelle option : </label>
+          <label name="option_classe">Dans quelle option : </label><br>
             <select name='option_classe'>
               <option id='0'>--Choisissez l'option-</option>
               <option id='SLAM'>SLAM</option>
               <option id='SISR'>SISR</option>
               <option id='les2'>Les 2 options</option>
-            </select>
+            </select><br>
           </td>
+        
           <td>
-          <label name="CCF_classe">Pour quelle Épreuve : </label>
+          <label name="CCF_classe">Pour quelle Épreuve : </label><br>
             <select name='CCF_classe'>
               <option id='0'>--Choisissez l'épreuve--</option>
               <option id='E4'>E4</option>
               <option id='E5SISR'>E5SISR</option>
               <option id='E5SLAM'>E5SLAM</option>
-            </select>
+            </select><br>
           </td>
+
           <td><input type="submit" name="soumettre" value="OK"/></td>
 
           <script>

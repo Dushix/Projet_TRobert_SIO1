@@ -101,8 +101,6 @@ echo "
     </head>
     <body>
 
-      <!--  <h1><span class='blue'>&lt;</span>Table<span class='blue'>&gt;</span> <span class='yellow'>Responsive</span></h1>-->
-
         <div>
           <h1>Saisie de Notes CCF</h1>
             <table class=container>
