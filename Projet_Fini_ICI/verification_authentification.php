@@ -41,6 +41,7 @@ if ($pass_verif == true){
     echo '<td>Le mot de passe est valide</td>';
     echo '</tr>';
     echo '</table>';
+    header("Location: ./index_Interface/Accueil_enseignant.php");
         } else {
             session_destroy();
             $code_err = 99;

@@ -1,4 +1,47 @@
 <?php
+session_start();
+if ( isset($_SESSION['identifiant']) && isset($_SESSION['hashDuMotDePasse'])){
+  $identifiant = (isset($_SESSION['identifiant'])) ? $_SESSION['identifiant'] : null;
+  $hashDuMotDePasse = (isset($_SESSION['hashDuMotDePasse'])) ? $_SESSION['hashDuMotDePasse'] : null;
+}
+
+$resultat = "";
+if(!empty($identifiant)&&!empty($hashDuMotDePasse)){
+require ('../ConnectionMySQL.php') ;
+$sql = "SELECT c.id_compte FROM comptes c WHERE c.identifiant= :identifiant AND  c.MotDePasse= :hashDuMotDePasse";
+$connection = getConnection();
+$instructions = $connection->prepare($sql);
+$instructions->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
+$instructions->bindParam(':hashDuMotDePasse', $hashDuMotDePasse, PDO::PARAM_STR);
+$instructions->execute();
+$resultat = $instructions->fetchAll() ;
+}
+
+if($resultat == NULL || $resultat == ""){
+  session_destroy();
+  echo '<body><table>';
+    echo '<tr>';
+    echo '<td>';
+    echo "Les brigands cherchant à accéder à des ressources protégées";
+    echo'</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td>';
+    echo "<br>Ces informations suivantes ont été enregistrée, et pourront étre utilisé contre vous si vous recommencer !!!";
+    echo'</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td>';
+    echo '-Adresse IP.<br>
+    -Adresse Mac.<br>
+    -Localisation.<br>
+    -Nom de votre Machine.<br>
+    -Marque de la Machine.<br>
+    -Nom de Session.';
+    echo '</td>';
+    echo '</tr>';
+    echo '</table></body>';
+} else {
 if (isset($_POST['soumettre'])){
   $bts_classe = (isset($_POST['bts_classe'])) ? $_POST['bts_classe'] : null;
   $option_classe = (isset($_POST['option_classe'])) ? $_POST['option_classe'] : null;
@@ -53,9 +96,6 @@ if(!empty($bts_classe)){
       }
   
       if($err_bts == false && $err_option == false && $err_CCF == false){
-
-          require ('./ConnectionMySQL.php') ;
-          $connection = getConnection();
 
           $sql_prof= "SELECT e.ID_ENSEIGNANT, e.Nom_enseignant FROM enseignants e";
           $info_prof = $connection->prepare($sql_prof);
@@ -183,7 +223,7 @@ echo "
                   echo "<td>$option</td>";// Option
                   echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
                   echo "<td>$CCF_classe</td>";// CCF
-                  echo "<td><input name='Candidat$id_eleve' type='text' value='$N_Candi'></td>";// Candidat
+                  echo "<td><input name='Candidat$id_eleve' type='text' maxlength='13' value='$N_Candi'></td>";// Candidat
                   echo "<td><input name='DATE$id_eleve' min='$ann1-01-01' max='$ann2-12-31' type='date' value='$DATE_EVAL'></td>";// Date examin
                   echo "<td><input name='DUREE$id_eleve' type='time' value='$DUREE_EVAL'></td></td>";// Durée de l’épreuve
                   echo "<td><input name='HEURE$id_eleve' type='time' value='$HEURE_EVAL'></td>";// Heure de convocation
@@ -223,11 +263,14 @@ echo "
             }
               echo "</table></div></body></html>";
       } else{
-          echo "non";
+        echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+        header("Location: Accueil_enseignant.php");
       }
   } else {
       echo '<h1>Le site est en cour de maintenance, merci de revenir en arriére</h1>';
   }
 } else {
   echo '<script type="text/javascript">alert("Vous devez remplir tous les champs"); </script>';
+  header("Location: Accueil_enseignant.php");  
+}
 }
