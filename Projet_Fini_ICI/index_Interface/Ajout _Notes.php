@@ -1,5 +1,6 @@
 <?php
-require ('./ConnectionMySQL.php') ;
+session_start();
+require ('../ConnectionMySQL.php') ;
 $connection = getConnection();
 
 if (isset($_POST['soumettre'])){
@@ -93,5 +94,7 @@ $id_CCF = $info_CCF[0]["ID_CCF"];
     $info_aj_CN->execute();
 
 }
+$code_err = 0;
+header("Location: Accueil_enseignant.php?erreur=$code_err");  
 
 ?>

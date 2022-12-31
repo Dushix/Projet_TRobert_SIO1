@@ -1,0 +1,17 @@
+form{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #323C50;
+    margin-top: 100px;
+    margin-left: 30%;
+    margin-right:30%;
+    width: 40%;
+    color:#A7A1AE;
+}
+html{
+    background-color: #1f2739;
+}
+select{
+    margin: 20px;
+}
