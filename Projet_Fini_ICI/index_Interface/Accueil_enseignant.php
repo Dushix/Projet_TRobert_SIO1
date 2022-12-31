@@ -1,11 +1,11 @@
 <html>
     <head>
        <meta charset="utf-8">
-        <link rel="stylesheet" href="note.css" media="screen" type="text/css" />
-        <title>Note CCF</title>
+        <link rel="stylesheet" href="Accueil_enseignant.css" media="screen" type="text/css" />
+        <title>Accueil enseignant</title>
     </head>
     <body>
-    <form name="Formulaire" action="lint.php" method="post">
+    <form name="Formulaire" action="Saisie_Notes.php" method="post">
         <div>
           <td> 
           <label name="bts_classe">Quelle BTS voulez vous voir : </label>
@@ -58,21 +58,6 @@
                       doc_CCF_cl.style.display = '';
                       doc_labelep_cl.style.display = '';
 
-                      doc_option_cl.onchange = function(){
-                        if(doc_option_cl.options.SLAM.selected){
-                          doc_CCF_cl.options[0].selected = true;
-                          doc_CCF_cl.options.E5SISR.style.display = 'none';
-                          doc_CCF_cl.options.E5SLAM.style.display = '';
-
-                        }else if(doc_option_cl.options.SISR.selected){
-                          doc_CCF_cl.options.E5SISR.style.display = '';
-                          doc_CCF_cl.options[0].selected = true;
-                          doc_CCF_cl.options.E5SLAM.style.display = 'none';
-                        } else {
-                          doc_CCF_cl.options.E5SISR.style.display = '';
-                          doc_CCF_cl.options.E5SLAM.style.display = ''
-                        }
-                      }
                     } else {
                       doc_option_cl[0].selected = true;
                       doc_option_cl.value = 'rien';
@@ -85,6 +70,22 @@
                       doc_labelep_cl.style.display = 'none';
                     }
                   }
+                  doc_option_cl.onchange = function(){
+                        if(doc_option_cl.options.SLAM.selected){
+                          doc_CCF_cl.options[0].selected = true;
+                          doc_CCF_cl.options.E5SISR.style.display = 'none';
+                          doc_CCF_cl.options.E5SLAM.style.display = '';
+
+                        }else if(doc_option_cl.options.SISR.selected){
+                          doc_CCF_cl.options.E5SISR.style.display = '';
+                          doc_CCF_cl.options[0].selected = true;
+                          doc_CCF_cl.options.E5SLAM.style.display = 'none';
+                        } else {
+                          doc_CCF_cl.options.E5SISR.style.display = 'none';
+                          doc_CCF_cl.options[0].selected = true;
+                          doc_CCF_cl.options.E5SLAM.style.display = 'none';
+                        }
+                      }
             </script>
 
         </div>

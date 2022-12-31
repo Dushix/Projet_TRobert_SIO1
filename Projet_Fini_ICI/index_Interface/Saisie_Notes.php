@@ -57,6 +57,11 @@ if(!empty($bts_classe)){
           require ('./ConnectionMySQL.php') ;
           $connection = getConnection();
 
+          $sql_prof= "SELECT e.ID_ENSEIGNANT, e.Nom_enseignant FROM enseignants e";
+          $info_prof = $connection->prepare($sql_prof);
+          $info_prof->execute();
+          $info_prof = $info_prof->fetchAll();
+
           $sql_ccf= "SELECT lc.ID_CCF, lc.coefficient FROM liste_epreuves_ccf lc WHERE lc.code_ccf= ? ";
           $info_ccf = $connection->prepare($sql_ccf);
           $info_ccf->bindParam(1, $CCF_classe, PDO::PARAM_STR);
@@ -91,8 +96,8 @@ echo "
 <html>
     <head>
        <meta charset='utf-8'>
-        <link rel='stylesheet' href='interface2.css' media='screen' type='text/css' />
-        <title>Note CCF</title>
+        <link rel='stylesheet' href='Saisie_Notes.css' media='screen' type='text/css' />
+        <title>Saisie des Notes</title>
     </head>
     <body>
 
@@ -113,7 +118,6 @@ echo "
                 <th>Durée de l’épreuve</th>
                 <th>Heure de convocation</th>
                 <th>Professeur</th>
-                <!-- <th>Numen</th> -->
                 <th>Intervenant</th>
                 <th>Note obtenue</th>
                 <th>COEFF</th>
@@ -173,94 +177,50 @@ echo "
                     }
                   }
 
+                  echo "<form name='Formulaire_$id_eleve' action='Ajout _Notes.php' method='post'>";
+                  echo "<tr>";
+                  echo "<div name='eleve_n$id_eleve'>";
+                  echo "<td>$ann1-$ann2</td>";// Année scolaire
+                  echo "<td>$bts</td>";// BTS
+                  echo "<td>$option</td>";// Option
+                  echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
+                  echo "<td>$CCF_classe</td>";// CCF
+                  echo "<td><input name='Candidat$id_eleve' type='text' value='$N_Candi'></td>";// Candidat
+                  echo "<td><input name='DATE$id_eleve' min='$ann1-01-01' max='$ann2-12-31' type='date' value='$DATE_EVAL'></td>";// Date examin
+                  echo "<td><input name='DUREE$id_eleve' type='time' value='$DUREE_EVAL'></td></td>";// Durée de l’épreuve
+                  echo "<td><input name='HEURE$id_eleve' type='time' value='$HEURE_EVAL'></td>";// Heure de convocation
+                  echo "<td><select id='eleve$id_eleve' name='prof$id_eleve'>";
+                  foreach ($info_prof as $key => $value) {
+                      foreach ($value as $sous_key => $sous_value) {
+                          if($sous_key == "Nom_enseignant"){
+                              $Nom_bdd_enseignant = $sous_value;
+                            }
+                            if($sous_key == "ID_ENSEIGNANT"){
+                              $ID_bdd_ENSEIGNANT = $sous_value;
+                            }
+                        }
+                  echo "<option id='$ID_bdd_ENSEIGNANT'>$Nom_bdd_enseignant</option>";
+                  }
+                  echo "</select></td>";// Professeur
+                  echo "<td><input type='text'  name='Intervenant$id_eleve' value='$Nom_Intervenant'></td>";// Intervenant
+                  echo "<td><input value='$NOTE' type='number' name='Note$id_eleve' placeholder='Note' step='0.01' min='0' max='20'></td>";// Note obtenue
+                  echo "<td>$coefficient</td>";// COEFF
+                  echo "<td><textarea name='Commentaire$id_eleve' placeholder='Sans Commentaire' cols='30' rows='5' minlength='3' maxlength='500' spellcheck>$Commentaire</textarea></td>";// Commentaire
+                  echo "<input type='hidden' name='option' value='$option_classe'>";
+                  echo "<input type='hidden' name='CCF' value='$CCF_classe'>";
+                  echo "<td><input class='submit' type='submit' name='soumettre' value='envoyer'></td>";
+                  echo '</tr>';
+                  echo "</div>";
+                  echo "</from>";
 
 
-                  // $sql_note= "SELECT n.ID_NOTE, n.NOTE, n.DATE_EVAL, n.DUREE_EVAL, n.HEURE_EVAL, t.Nom_enseignant, n.Nom_Intervenant, n.Commentaire FROM notes_ccf n INNER JOIN eleves e ON e.ID_ELEVE=n.fk_ID_ELEVE JOIN liste_epreuves_ccf l ON l.ID_CCF=n.fk_ID_CCF JOIN enseignants t ON t.ID_ENSEIGNANT=n.fk_ID_ENSEIGNANT WHERE l.code_ccf='$CCF_classe' AND e.ID_ELEVE='$id_eleve'";
-                  // $info_note = $connection->prepare($sql_note);
-                  // // $info_note->bindParam(1, $CCF_classe, PDO::PARAM_STR);
-                  // $info_note->execute();
-                  // $info_note = $info_note->fetchAll();
-                  // // print_r($info_note);
+                  //JavaS
+                  $doc = "document.querySelector('select#eleve$id_eleve')";
+                  echo "<script type='text/javascript'>
+                  var doc_sel$id_eleve = $doc;
+                  doc_sel$id_eleve.value = '$Nom_enseignant'
+                  </script>";
 
-
-
-                  
-                  // foreach ($info_note as $key_info => $value_info) {
-                  //   foreach ($value_info as $sous_key_info => $sous_value_info) {
-                  //     if($sous_key_info == "ID_NOTE"){
-                  //       $ID_NOTE = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "NOTE"){
-                  //       $NOTE = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "DATE_EVAL"){
-                  //       $DATE_EVAL = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "HEURE_EVAL"){
-                  //       $HEURE_EVAL = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "DUREE_EVAL"){
-                  //       $DUREE_EVAL = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "Nom_enseignant"){
-                  //       $Nom_enseignant = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "Nom_Intervenant"){
-                  //       $Nom_Intervenant = $sous_value_info;
-                  //     }
-                  //     if($sous_key_info == "Commentaire"){
-                  //       $Commentaire = $sous_value_info;
-                  //     }
-                      
-                      
-                   
-
-
-
-
-                  if($cible_op){
-                    if($option_classe === $option){
-                      echo "<tr name='eleve_n$id_eleve'>";
-                      echo "<td>$ann1-$ann2</td>";// Année scolaire
-                      echo "<td>$bts</td>";// BTS
-                      echo "<td>$option</td>";// Option
-                      echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
-                      echo "<td>$CCF_classe</td>";// CCF
-                      echo "<td><input type='text' value='$N_Candi'></td>";// Candidat
-                      echo "<td><input min='$ann1-01-01' max='$ann2-12-31' type='date' value='$DATE_EVAL'></td>";// Date examin
-                      echo "<td><input type='time' value='$DUREE_EVAL'></td></td>";// Durée de l’épreuve
-                      echo "<td><input type='time' value='$HEURE_EVAL'></td>";// Heure de convocation
-                      echo "<td>$Nom_enseignant</td>";// Professeur
-                      // echo "<td></td>";// Numen
-                      echo "<td>$Nom_Intervenant</td>";// Intervenant
-                      echo "<td>$NOTE</td>";// Note obtenue
-                      echo "<td>$coefficient</td>";// COEFF
-                      echo "<td>$Commentaire</td>";// Commentaire
-                      echo '</tr>';
-                      
-                    }
-                  } else {
-                    echo "<tr name='eleve_n$id_eleve'>";
-                    echo "<td>$ann1-$ann2</td>";// Année scolaire
-                    echo "<td>$bts</td>";// BTS
-                    echo "<td>$option</td>";// Option
-                    echo "<td><b>$nom_eleve</b> $prenom_eleve</td>";// Elèves
-                    echo "<td>$CCF_classe</td>";// CCF
-                    echo "<td><input type='text' value='$N_Candi'></td>";// Candidat
-                    echo "<td></td>";// Date examen
-                    echo "<td></td>";// Durée de l’épreuve
-                    echo "<td></td>";// Heure de convocation
-                    echo "<td></td>";// Professeur
-                    echo "<td></td>";// Numen
-                    echo "<td></td>";// Intervenant
-                    echo "<td></td>";// Note obtenue
-                    echo "<td>$coefficient</td>";// COEFF
-                    echo "<td></td>";// Commentaire
-                    echo '</tr>';}
-                  
-                    // $sql_aj_note = "INSERT INTO `notes_ccf` (`fk_ID_CCF`,`fk_ID_ELEVE`,`NOTE`,`DATE_EVAL`,`DUREE_EVAL`,`HEURE_EVAL`,`fk_ID_ENSEIGNANT`,`Nom_Intervenant`,`Commentaire`) VALUES ('$id_ccf','$id_eleve','0','0001-01-01','00:00:00','00:00:00','0','rien','rien')";
-                    // $info_aj_note = $connection->prepare($sql_aj_note);
-                    // $info_aj_note->execute();
                  
             }
               echo "</table></div></body></html>";

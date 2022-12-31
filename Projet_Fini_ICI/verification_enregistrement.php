@@ -78,7 +78,7 @@ if ($erreur === false) {
     echo '<td>Compte créé</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="Module_enregistrement.php" >Cliquez ici pour vous connecter.</a></td>';
+    echo '<td><a href="Module_enregistrement_et_AUTH.php" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 
@@ -88,7 +88,7 @@ if ($erreur === false) {
     echo '<td>Vous avez déja un compte</td>';
     echo '</tr>';
     echo '<tr>';
-    echo '<td><a href="Module_enregistrement.php" >Cliquez ici pour vous connecter.</a></td>';
+    echo '<td><a href="Module_enregistrement_et_AUTH.php" >Cliquez ici pour vous connecter.</a></td>';
     echo '</tr>';
     echo '</table>';
 }
@@ -145,12 +145,12 @@ if ($erreur === false) {
     echo '</tr>';
     echo '</table>';
     $code_err = 762;
-    header("Location: Module_enregistrement.php?erreur=$code_err");    
+    header("Location: Module_enregistrement_et_AUTH.php?erreur=$code_err");    
     exit();
 }
     } else {
     $code_err = 862;
-    header("Location: Module_enregistrement.php?erreur=$code_err");    
+    header("Location: Module_enregistrement_et_AUTH.php?erreur=$code_err");    
     exit();
     }
 ?>

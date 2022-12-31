@@ -2,7 +2,7 @@
     <head>
        <meta charset="utf-8">
         <link rel="stylesheet" href="note.css" media="screen" type="text/css" />
-        <title>Note CCF</title>
+        <title>Accueil enseignant</title>
     </head>
     <body>
     <form name="Formulaire" action="interface2.php" method="post">
