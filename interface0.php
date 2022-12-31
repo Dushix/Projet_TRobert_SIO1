@@ -1,7 +1,7 @@
 <html>
     <head>
        <meta charset="utf-8">
-        <link rel="stylesheet" href="note.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="interface0b.css">
         <title>Accueil enseignant</title>
     </head>
     <body>
