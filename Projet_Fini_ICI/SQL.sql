@@ -138,7 +138,7 @@ INSERT INTO `liste_des_bts` (`ID_BTS`, `code_bts`, `Libelle_bts`) VALUES
 	(4, 'CG', 'Comptabilité et Gestion'),
 	(5, 'NDRC', 'Négociation Digitalisation de la relation client'),
 	(6, 'PI', 'Professions immobilières'),
-	(7, 'SAM', 'Support à l\'action managériale'),
+	(7, 'SAM', "Support à l\'action managériale"),
 	(8, 'TOU', 'Tourisme');
 
 -- Listage de la structure de table bkridbis. liste_epreuves_ccf
