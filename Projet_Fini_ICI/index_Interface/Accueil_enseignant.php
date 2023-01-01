@@ -42,6 +42,7 @@ if($resultat == NULL || $resultat == ""){
     echo '</tr>';
     echo '</table></body>';
 } else {
+  $erreur = '';
   if (isset($_GET['erreur'])){
         $erreur = (isset($_GET['erreur'])) ? $_GET['erreur'] : null;
     } if(empty($erreur)){
