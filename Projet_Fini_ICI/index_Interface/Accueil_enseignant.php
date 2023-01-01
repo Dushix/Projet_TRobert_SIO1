@@ -102,12 +102,12 @@ echo "
           <td><input type='submit' name='soumettre' value='OK'/></td>
 
           <script>
-                  var doc_bts_cl = document.querySelector('select[name='bts_classe']')
-                  var doc_labelop_cl = document.querySelector('label[name='option_classe']')
-                  var doc_option_cl = document.querySelector('select[name='option_classe']')
+                  var doc_bts_cl = document.querySelector('select[name=bts_classe]')
+                  var doc_labelop_cl = document.querySelector('label[name=option_classe]')
+                  var doc_option_cl = document.querySelector('select[name=option_classe]')
 
-                  var doc_labelep_cl = document.querySelector('label[name='CCF_classe']')
-                  var doc_CCF_cl = document.querySelector('select[name='CCF_classe']')
+                  var doc_labelep_cl = document.querySelector('label[name=CCF_classe]')
+                  var doc_CCF_cl = document.querySelector('select[name=CCF_classe]')
 
                   doc_bts_cl.onchange = function()
                   {
